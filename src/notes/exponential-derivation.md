@@ -1,69 +1,67 @@
-# Exponential — derivation of the solution
+# Heat Signal — derivation of the solution
 
-## Contents
+Differential equation type: first-order linear (Newton's law of cooling), solved by separation of variables.
 
-- [1. The general form](#1-the-general-form)
-- [2. Separating the variables](#2-separating-the-variables)
-- [3. Integrating both sides](#3-integrating-both-sides)
-- [4. The initial condition](#4-the-initial-condition)
-- [5. Steady state](#5-steady-state)
+Function type of the solution: exponential.
+
+Contents:
+
+1. [The general form](#1-the-general-form)
+2. [Separating the variables](#2-separating-the-variables)
+3. [Integrating](#3-integrating)
+4. [The starting condition](#4-the-starting-condition)
+5. [The steady state](#5-the-steady-state)
 
 ## 1. The general form
 
-A quantity A changes at a rate proportional to the gap between its current value and its target value B, with k as the constant of proportionality. Written as a differential equation, that is:
+A heat signal is a temperature T settling from its previous temperature T_o toward the set temperature T_s. It closes at a rate proportional to the gap that remains — Newton's law of cooling:
 
 $$
-\frac{dA}{dt} = -k(A - B)
+\frac{dT}{dt} = -k \left( T - T_s \right)
 $$
 
-The minus sign is there because the change always acts to close the gap: when A is above B the change is negative, and when A is below B the change is positive. This is the general form of Newton's law of cooling, and it holds for any quantity whose rate of change is proportional to the gap that remains.
+The constant k is Boltzmann's constant: a fixed constant of the model, not a setting, so it has no slider.
 
 ## 2. Separating the variables
 
-To solve it, the variables are separated, with all the A terms on one side and all the t terms on the other:
+The equation is separable: all the T terms go on one side, all the t terms on the other:
 
 $$
-\frac{dA}{A - B} = -k\,dt
+\frac{dT}{T - T_s} = -k \, dt
 $$
 
-## 3. Integrating both sides
+## 3. Integrating
 
-Each side is then integrated:
-
-$$
-\int \frac{dA}{A - B} = \int -k\,dt
-$$
+Integrating both sides gives the logarithm of the gap:
 
 $$
-\ln|A - B| = -kt + C
+\ln \left| T - T_s \right| = -kt + C
 $$
 
-Raising e to both sides gives the gap itself as an exponential, with a single constant set by where the quantity starts:
+Exponentiating removes the logarithm, and the constant of integration becomes a multiplicative constant:
 
 $$
-A - B = C_1 e^{-kt}
+T - T_s = C_1 e^{-kt}
 $$
 
-## 4. The initial condition
+## 4. The starting condition
 
-The quantity starts at the value A(0) — the value of A at time zero — and substituting that in gives:
-
-$$
-A(0) - B = C_1
-$$
-
-So the full solution is:
+At t = 0 the temperature is T_o, so the constant is the starting gap:
 
 $$
-A(t) = B + (A(0) - B)e^{-kt}
+T_o - T_s = C_1
 $$
 
-## 5. Steady state
-
-As time grows, the exponential term dies away and the solution settles onto the target:
+and the solution is:
 
 $$
-\lim_{t \to \infty} A(t) = B
+T(t) = T_s + \left( T_o - T_s \right) e^{-kt}
 $$
 
-The travel from A(0) to B is the transient. The value B that remains is the steady state.
+## 5. The steady state
+
+As t grows the exponential dies away and only the set temperature remains:
+
+$$
+\lim_{t \to \infty} T(t) = T_s
+$$

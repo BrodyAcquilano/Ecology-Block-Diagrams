@@ -1,6 +1,7 @@
 // Symbol glyph — the picture of a symbol: a white circle with
 // the symbol drawn inside it. Inside lines are white for
-// operators, heat-orange for signals, red for transforms.
+// operators, heat-orange for signals, red for transforms
+// and for the heat signal's fire.
 import type { ReactNode } from "react";
 
 export const INK = "#e8e8e8";
@@ -58,8 +59,13 @@ export const GLYPHS: Record<string, ReactNode> = {
   boltzmann: (
     <path d="M10 48 C 16 47, 20 20, 27 16 C 34 12, 37 26, 42 38 C 46 46, 50 48, 54 48" />
   ),
-  // Exponential — a curve climbing to the right and levelling off
-  exponential: <path d="M10 50 C 24 49, 36 44, 43 33 C 48.5 24.5, 50.5 17, 50.5 11" />,
+  // Heat signal — a fire: an outer flame with a smaller flame inside it
+  heat: (
+    <>
+      <path d="M32 10 C 35 18, 43 24, 43 35 C 43 45, 38 52, 32 52 C 26 52, 21 45, 21 35 C 21 28, 24 23, 27 18 C 28 22, 29 24, 31 25 C 30 20, 31 15, 32 10 Z" />
+      <path d="M32 34 C 34 37, 36 39, 36 42 C 36 46, 34 48, 32 48 C 30 48, 28 46, 28 42 C 28 39, 30 37, 32 34 Z" />
+    </>
+  ),
   // Constant — a line across the whole middle of the circle, through both edges
   constant: <line x1="3" y1="32" x2="61" y2="32" />,
   // Transforms — exponential transform: three wavy radiation lines
@@ -83,7 +89,7 @@ export const GLYPH_INK: Record<string, string> = {
   filter: INK,
   oscillator: SIGNAL_INK,
   boltzmann: SIGNAL_INK,
-  exponential: SIGNAL_INK,
+  heat: TRANSFORM_INK,
   constant: SIGNAL_INK,
   transform: TRANSFORM_INK,
 };

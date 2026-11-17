@@ -1,12 +1,12 @@
 // Thermodynamic filter — reusable component
 // (file: ExponentialTransform.tsx)
-// A quantity that is constant in time and changes only in
+// A temperature that is constant in time and changes only in
 // position: the thermodynamic distance filter. Its value at
-// position x is A(x) = end + (initial - end) * e^(-cutoff * x),
-// falling from the initial value at x = 0 toward the end value
-// as x grows, at a rate set by the cutoff. There is no time
-// component: the graph is a heat distribution along x,
-// from x = 0 to x = n.
+// position x is T(x) = T_end + (T(0) - T_end) * e^(-cutoff * x),
+// falling from the temperature at x = 0 toward the end
+// temperature as x grows, at a rate set by the cutoff. There
+// is no time component: the graph is a heat distribution
+// along x, from x = 0 to x = n.
 import { useEffect, useRef, useState } from "react";
 import { SymbolGlyph } from "./SymbolGlyph";
 
@@ -44,7 +44,7 @@ export function ExponentialTransform() {
     ctx.lineTo(padL, H - padB);
     ctx.lineTo(W - padR, H - padB);
     ctx.stroke();
-    // End value line
+    // End temperature line
     ctx.strokeStyle = "#e8e8e8";
     ctx.setLineDash([5, 4]);
     ctx.beginPath();
@@ -54,11 +54,11 @@ export function ExponentialTransform() {
     ctx.setLineDash([]);
     ctx.fillStyle = "#e8e8e8";
     ctx.font = "12px system-ui";
-    ctx.fillText("end value = " + end, padL + 6, y(end) - 6);
-    ctx.fillText("initial = " + initial, padL + 6, y(initial) + (initial > end ? -6 : 14));
+    ctx.fillText("end temperature = " + end, padL + 6, y(end) - 6);
+    ctx.fillText("T(0) = " + initial, padL + 6, y(initial) + (initial > end ? -6 : 14));
     ctx.fillText("0", padL - 3, H - 10);
     ctx.fillText("x = n", W - padR - 26, H - 10);
-    ctx.fillText("A", 8, padT + 4);
+    ctx.fillText("T", 8, padT + 4);
     // The distribution along x
     ctx.strokeStyle = "#e5484d";
     ctx.lineWidth = 2;
@@ -80,14 +80,15 @@ export function ExponentialTransform() {
         <h2 className="component-title">Thermodynamic filter</h2>
       </div>
       <p className="component-intro">
-        The thermodynamic distance filter: a quantity that is constant in time
-        and falls off exponentially with distance — the attenuation of a signal
-        as it travels through a medium. Used for temperature, thermodynamics,
-        heat exchange.
+        The thermodynamic filter: a temperature that is constant in time and
+        falls off exponentially with distance x — the attenuation of heat as
+        it travels through a medium. Used for temperature, thermodynamics,
+        heat exchange. The equation along x is first-order linear; its
+        solution is an exponential in position.
       </p>
       <div className="component-controls">
         <label>
-          Initial value: {initial}
+          Temperature at x = 0: {initial}
           <input
             type="range"
             min={0}
@@ -98,7 +99,7 @@ export function ExponentialTransform() {
           />
         </label>
         <label>
-          End value: {end}
+          End temperature: {end}
           <input
             type="range"
             min={0}

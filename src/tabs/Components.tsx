@@ -5,7 +5,7 @@
 // Each entry in the list shows the component's symbol beside
 // its name.
 import { useState } from "react";
-import { Exponential } from "../components/Exponential";
+import { HeatSignal } from "../components/Exponential";
 import { ExponentialTransform } from "../components/ExponentialTransform";
 import { SymbolGlyph } from "../components/SymbolGlyph";
 
@@ -13,7 +13,7 @@ const GROUPS: { title: string; items: { name: string; kind: string }[] }[] = [
   {
     title: "Signals",
     items: [
-      { name: "Exponential", kind: "exponential" },
+      { name: "Heat Signal", kind: "heat" },
       { name: "Oscillator", kind: "oscillator" },
     ],
   },
@@ -25,7 +25,7 @@ const GROUPS: { title: string; items: { name: string; kind: string }[] }[] = [
 ];
 
 export function Components() {
-  const [active, setActive] = useState("Exponential");
+  const [active, setActive] = useState("Heat Signal");
   return (
     <div className="components-layout">
       <div className="components-list">
@@ -47,7 +47,7 @@ export function Components() {
         ))}
       </div>
       <div className="components-body">
-        {active === "Exponential" && <Exponential />}
+        {active === "Heat Signal" && <HeatSignal />}
         {active === "Oscillator" && <p className="empty-note">Empty for now.</p>}
         {active === "Thermodynamic filter" && <ExponentialTransform />}
       </div>

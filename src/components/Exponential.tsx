@@ -1,19 +1,24 @@
-// Exponential — reusable component
-// A quantity A settles from its starting value A(0) to its target
-// value B at a rate set by the constant k, following the general
-// solution A(t) = B + (A(0) - B) * e^(-k t) — the Newton's law
-// of cooling form. Sliders set A(0), B and k; the graph below
-// follows the solution live, transient first, then steady state.
+// Heat Signal — reusable component
+// (file: Exponential.tsx)
+// A temperature T settling from its previous value T_o to the
+// set value T_s, following Newton's law of cooling:
+// T(t) = T_s + (T_o - T_s) * e^(-k t). The rate constant k is
+// Boltzmann's constant — a fixed constant of the model, so it
+// has no slider. Sliders set T_o and T_s; the graph follows the
+// solution live, transient first, then steady state.
 // The derivation of the solution is in the note below the graph.
 import { useEffect, useRef, useState } from "react";
 import { MarkdownNote } from "./MarkdownNote";
 import { SymbolGlyph } from "./SymbolGlyph";
 import note from "../notes/exponential-derivation.md?raw";
 
-export function Exponential() {
-  const [A0, setA0] = useState(80);
-  const [B, setB] = useState(25);
-  const [k, setK] = useState(0.7);
+// Boltzmann's constant — the model's fixed rate constant.
+// In the graph's normalised time units it sets the settling rate.
+const K = 0.7;
+
+export function HeatSignal() {
+  const [To, setTo] = useState(80);
+  const [Ts, setTs] = useState(25);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -33,8 +38,8 @@ export function Exponential() {
       const padR = 12;
       const padT = 14;
       const padB = 28;
-      const lo = Math.min(A0, B);
-      const hi = Math.max(A0, B);
+      const lo = Math.min(To, Ts);
+      const hi = Math.max(To, Ts);
       const span = Math.max(hi - lo, 10);
       const yMin = lo - span * 0.25;
       const yMax = hi + span * 0.25;
@@ -49,36 +54,36 @@ export function Exponential() {
       ctx.lineTo(padL, H - padB);
       ctx.lineTo(W - padR, H - padB);
       ctx.stroke();
-      // Steady state line at B
+      // Steady state line at T_s
       ctx.strokeStyle = "#e8e8e8";
       ctx.setLineDash([5, 4]);
       ctx.beginPath();
-      ctx.moveTo(padL, y(B));
-      ctx.lineTo(W - padR, y(B));
+      ctx.moveTo(padL, y(Ts));
+      ctx.lineTo(W - padR, y(Ts));
       ctx.stroke();
       ctx.setLineDash([]);
       ctx.fillStyle = "#e8e8e8";
       ctx.font = "12px system-ui";
-      ctx.fillText("steady state  B = " + B, padL + 6, y(B) - 6);
-      ctx.fillText("A(0) = " + A0, padL + 6, y(A0) + (A0 > B ? -6 : 14));
+      ctx.fillText("steady state  T_s = " + Ts, padL + 6, y(Ts) - 6);
+      ctx.fillText("T_o = " + To, padL + 6, y(To) + (To > Ts ? -6 : 14));
       ctx.fillText("t", W - padR - 10, H - 8);
-      ctx.fillText("A", 8, padT + 4);
+      ctx.fillText("T", 8, padT + 4);
       // The solution curve, drawn up to the moving time point
-      ctx.strokeStyle = "#ff8c3a";
+      ctx.strokeStyle = "#e5484d";
       ctx.lineWidth = 2;
       ctx.beginPath();
       const steps = Math.max(2, Math.floor(tNow * 30));
       for (let i = 0; i <= steps; i++) {
         const t = i / 30;
-        const a = B + (A0 - B) * Math.exp(-k * t);
+        const a = Ts + (To - Ts) * Math.exp(-K * t);
         if (i === 0) ctx.moveTo(x(t), y(a));
         else ctx.lineTo(x(t), y(a));
       }
       ctx.stroke();
       ctx.lineWidth = 1;
       // Moving point on the curve
-      const aNow = B + (A0 - B) * Math.exp(-k * tNow);
-      ctx.fillStyle = "#ff8c3a";
+      const aNow = Ts + (To - Ts) * Math.exp(-K * tNow);
+      ctx.fillStyle = "#e5484d";
       ctx.beginPath();
       ctx.arc(x(tNow), y(aNow), 4, 0, Math.PI * 2);
       ctx.fill();
@@ -86,53 +91,44 @@ export function Exponential() {
     };
     raf = requestAnimationFrame(draw);
     return () => cancelAnimationFrame(raf);
-  }, [A0, B, k]);
+  }, [To, Ts]);
 
   return (
     <div>
       <div className="component-header">
-        <SymbolGlyph kind="exponential" size={56} />
-        <h2 className="component-title">Exponential</h2>
+        <SymbolGlyph kind="heat" size={56} />
+        <h2 className="component-title">Heat Signal</h2>
       </div>
       <p className="component-intro">
-        A signal that closes on its target value at a rate proportional to the
-        gap that remains — the settling behind Newton's law of cooling. Used
-        for temperature, and for any other quantity that settles the same way.
+        A temperature settling: T starts at its previous value T_o and closes
+        on the set temperature T_s at a rate proportional to the gap that
+        remains — Newton's law of cooling. The differential equation is
+        first-order linear; its solution is exponential.
       </p>
       <div className="component-controls">
         <label>
-          Starting value A(0): {A0}
+          Previous temperature T_o: {To}
           <input
             type="range"
             min={0}
             max={100}
             step={1}
-            value={A0}
-            onChange={(e) => setA0(Number(e.target.value))}
+            value={To}
+            onChange={(e) => setTo(Number(e.target.value))}
           />
         </label>
         <label>
-          Target value B: {B}
+          Set temperature T_s: {Ts}
           <input
             type="range"
             min={0}
             max={100}
             step={1}
-            value={B}
-            onChange={(e) => setB(Number(e.target.value))}
+            value={Ts}
+            onChange={(e) => setTs(Number(e.target.value))}
           />
         </label>
-        <label>
-          Decay rate k: {k.toFixed(2)}
-          <input
-            type="range"
-            min={0.1}
-            max={3}
-            step={0.05}
-            value={k}
-            onChange={(e) => setK(Number(e.target.value))}
-          />
-        </label>
+        <p className="empty-note">Rate constant k: Boltzmann's constant — fixed, no slider.</p>
       </div>
       <canvas ref={canvasRef} width={560} height={280} className="component-graph" />
       <MarkdownNote source={note} />

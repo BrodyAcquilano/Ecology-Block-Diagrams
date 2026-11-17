@@ -42,10 +42,10 @@
     "sortOrder": 5
   },
   {
-    "definition": "What it represents is a signal that closes on its target at a rate proportional to the gap that remains — fast while the gap is big, slowing as the gap shrinks, levelling off as it arrives: the general settling Q(t) = B + (A − B)·e^(−kt), where A is the starting value, B is the target value, and k is the rate constant. It is the simplified form of the oscillator signal — the oscillator's envelope and mean with the swing removed — and it is the form the envelope signal converter puts out. It appears twice in the chain: once as that converter's output, and once again after the mixer, because a transform can scale an exponential's size without changing its kind — the signal at a point is still this same exponential settling, only weaker. Whether it climbs or falls is set by the signal itself, by the sign of B − A: rising and falling are the same exponential, closing the gap from opposite sides.\n\nThe equivalent diagrams. This symbol can be drawn four ways — the curve climbing or falling, toward the right or toward the left — and all four are equivalent symbols: each one stands for the same exponential signal, the same closing-on-the-target at a rate proportional to the gap. When the direction is specifically known, the drawing that matches it can be used: rising, B > A, climbs — drawn here up to the right, the form this note uses — and falling, B < A, drops. But when the direction is unknown, the four are interchangeable: any one of them can be drawn, and it still means the exponential — the direction is then carried by the signal itself, by the sign of B − A, not by which way the curve in the circle happens to lean.",
+    "definition": "What it represents is a temperature signal: a temperature T settling from its previous value T_o toward the set value T_s, closing at a rate proportional to the gap that remains. The differential equation is Newton's law of cooling, dT/dt = −k(T − T_s) — first-order linear, solved by separation of variables — and its solution is T(t) = T_s + (T_o − T_s)·e^(−kt), where k is Boltzmann's constant, a fixed constant of the model. Function type of the solution: exponential. Whether it climbs or falls is set by the sign of T_s − T_o: heating and cooling are the same signal, closing the gap from opposite sides.",
     "group": "signal",
-    "kind": "exponential",
-    "name": "Exponential signal",
+    "kind": "heat",
+    "name": "Heat Signal",
     "sortOrder": 6
   },
   {
@@ -77,7 +77,7 @@
     "sortOrder": 10
   },
   {
-    "definition": "What it represents is an exponential in space rather than in time: a quantity that is constant in time at every point, but whose value falls off exponentially with distance from where it starts — a thermodynamic distance filter, the attenuation a signal undergoes as it travels through a medium. Its value at position x is set by three numbers: the initial value at x = 0, the end value it falls toward as x grows, and the cutoff rate, which sets how fast the fall happens — a large cutoff rate spends the signal quickly, a small one lets it reach far. It is the spatial twin of the exponential signal: the same closing on a value at a rate proportional to the gap that remains, but along position instead of time, so nothing in it ever changes with time.",
+    "definition": "What it represents is temperature falling off with distance: a temperature that is constant in time at every point, but whose value falls exponentially as position x grows — the attenuation of heat as it travels through a medium. Its value at position x is set by three numbers: the temperature at x = 0, the end temperature it falls toward as x grows, and the cutoff rate, which sets how fast the fall happens — a large cutoff rate spends the heat quickly, a small one lets it reach far. The equation along x, dT/dx = −c(T − T_end), is first-order linear, and its solution is an exponential in position rather than in time, so nothing in it ever changes with time.",
     "group": "transform",
     "kind": "transform",
     "name": "Thermodynamic filter",
