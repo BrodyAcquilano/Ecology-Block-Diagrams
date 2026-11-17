@@ -1,4 +1,5 @@
-// Exponential transform — reusable component
+// Thermodynamic filter — reusable component
+// (file: ExponentialTransform.tsx)
 // A quantity that is constant in time and changes only in
 // position: the thermodynamic distance filter. Its value at
 // position x is A(x) = end + (initial - end) * e^(-cutoff * x),
@@ -76,7 +77,7 @@ export function ExponentialTransform() {
     <div>
       <div className="component-header">
         <SymbolGlyph kind="transform" size={56} />
-        <h2 className="component-title">Exponential transform</h2>
+        <h2 className="component-title">Thermodynamic filter</h2>
       </div>
       <p className="component-intro">
         The thermodynamic distance filter: a quantity that is constant in time

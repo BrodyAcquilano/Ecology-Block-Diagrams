@@ -20,7 +20,7 @@ const GROUPS: { title: string; items: { name: string; kind: string }[] }[] = [
   { title: "Operators", items: [] },
   {
     title: "Transforms",
-    items: [{ name: "Exponential transform", kind: "transform" }],
+    items: [{ name: "Thermodynamic filter", kind: "transform" }],
   },
 ];
 
@@ -49,7 +49,7 @@ export function Components() {
       <div className="components-body">
         {active === "Exponential" && <Exponential />}
         {active === "Oscillator" && <p className="empty-note">Empty for now.</p>}
-        {active === "Exponential transform" && <ExponentialTransform />}
+        {active === "Thermodynamic filter" && <ExponentialTransform />}
       </div>
     </div>
   );
