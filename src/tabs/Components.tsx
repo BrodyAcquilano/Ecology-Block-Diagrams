@@ -1,11 +1,14 @@
 // Components tab
 // A list of reusable components, grouped the same way as the
-// symbols: Signals, Operators and Transforms.
+// symbols: Signals, Operators, Control signals and Transforms.
 // Operators is empty for now.
+// Circle for normal signals, gear for control signals,
+// square for transforms.
 // Each entry in the list shows the component's symbol beside
 // its name.
 import { useState } from "react";
 import { HeatSignal } from "../components/Exponential";
+import { Thermostat } from "../components/Thermostat";
 import { ExponentialTransform } from "../components/ExponentialTransform";
 import { SymbolGlyph } from "../components/SymbolGlyph";
 
@@ -17,6 +20,10 @@ const GROUPS: { title: string; items: { name: string; kind: string }[] }[] = [
     ],
   },
   { title: "Operators", items: [] },
+  {
+    title: "Control signals",
+    items: [{ name: "Thermostat signal", kind: "thermostat" }],
+  },
   {
     title: "Transforms",
     items: [{ name: "Thermodynamic filter", kind: "transform" }],
@@ -47,6 +54,7 @@ export function Components() {
       </div>
       <div className="components-body">
         {active === "Heat Signal" && <HeatSignal />}
+        {active === "Thermostat signal" && <Thermostat />}
         {active === "Thermodynamic filter" && <ExponentialTransform />}
       </div>
     </div>

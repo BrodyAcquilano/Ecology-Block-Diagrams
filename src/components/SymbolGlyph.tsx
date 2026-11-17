@@ -1,12 +1,18 @@
-// Symbol glyph — the picture of a symbol: a white circle with
-// the symbol drawn inside it. Inside lines are white for
-// operators, heat-orange for signals, red for transforms
-// and for the heat signal's fire.
+// Symbol glyph — the picture of a symbol, drawn inside an
+// outline that says what kind of thing it is:
+// a white circle for normal signals and operators,
+// a white square for transforms, a gear for control signals.
+// Inside lines are white for operators, heat-orange for
+// signals, red for transforms and thermodynamic signals.
 import type { ReactNode } from "react";
 
 export const INK = "#e8e8e8";
 export const SIGNAL_INK = "#ff8c3a";
 export const TRANSFORM_INK = "#e5484d";
+
+// Gear outline (8 teeth) for control signals.
+export const GEAR_PATH =
+  "M55.7 28.2 L61.6 27.3 L61.6 36.7 L55.7 35.8 L51.4 46.1 L56.3 49.6 L49.6 56.3 L46.1 51.4 L35.8 55.7 L36.7 61.6 L27.3 61.6 L28.2 55.7 L17.9 51.4 L14.4 56.3 L7.7 49.6 L12.6 46.1 L8.3 35.8 L2.4 36.7 L2.4 27.3 L8.3 28.2 L12.6 17.9 L7.7 14.4 L14.4 7.7 L17.9 12.6 L28.2 8.3 L27.3 2.4 L36.7 2.4 L35.8 8.3 L46.1 12.6 L49.6 7.7 L56.3 14.4 L51.4 17.9 Z";
 
 export const GLYPHS: Record<string, ReactNode> = {
   // Operators — a short minus in the centre
@@ -53,7 +59,6 @@ export const GLYPHS: Record<string, ReactNode> = {
   // Steady-state filter — hourglass, drawn big in its circle
   filter: <path d="M19 14 L45 14 L34.5 32 L45 50 L19 50 L29.5 32 Z" />,
   // Signals — Boltzmann: a distribution curve, not letters
-  // Boltzmann — a distribution curve, not letters
   boltzmann: (
     <path d="M10 48 C 16 47, 20 20, 27 16 C 34 12, 37 26, 42 38 C 46 46, 50 48, 54 48" />
   ),
@@ -64,10 +69,21 @@ export const GLYPHS: Record<string, ReactNode> = {
       <path d="M32 34 C 34 37, 36 39, 36 42 C 36 46, 34 48, 32 48 C 30 48, 28 46, 28 42 C 28 39, 30 37, 32 34 Z" />
     </>
   ),
-  // Constant — a line across the whole middle of the circle, through both edges
-  constant: <line x1="3" y1="32" x2="61" y2="32" />,
-  // Transforms — exponential transform: three wavy radiation lines
-  // centred in the circle, gaps between them, not touching the edges
+  // Control signals — thermostat: a dial. Tick lines in an arc
+  // across the top, a small circle in the middle, a needle line.
+  thermostat: (
+    <>
+      <line x1="17.9" y1="26.9" x2="14.1" y2="25.5" />
+      <line x1="23.4" y1="19.7" x2="21.1" y2="16.4" />
+      <line x1="32" y1="17" x2="32" y2="13" />
+      <line x1="40.6" y1="19.7" x2="42.9" y2="16.4" />
+      <line x1="46.1" y1="26.9" x2="49.9" y2="25.5" />
+      <circle cx="32" cy="32" r="4.5" />
+      <line x1="32" y1="32" x2="38.3" y2="23" />
+    </>
+  ),
+  // Transforms — thermodynamic filter: three wavy radiation lines
+  // centred in the square, gaps between them, not touching the edges
   transform: (
     <>
       <path d="M16 22 q 4 -5, 8 0 t 8 0 t 8 0 t 8 0" />
@@ -87,14 +103,30 @@ export const GLYPH_INK: Record<string, string> = {
   filter: INK,
   boltzmann: SIGNAL_INK,
   heat: TRANSFORM_INK,
-  constant: SIGNAL_INK,
+  thermostat: TRANSFORM_INK,
   transform: TRANSFORM_INK,
 };
 
+// The outline shape says the kind: circle for normal signals
+// and operators, square for transforms, gear for control signals.
+export const GLYPH_SHAPE: Record<string, "circle" | "square" | "gear"> = {
+  transform: "square",
+  thermostat: "gear",
+};
+
 export function SymbolGlyph({ kind, size = 64 }: { kind: string; size?: number }) {
+  const shape = GLYPH_SHAPE[kind] ?? "circle";
   return (
     <svg viewBox="0 0 64 64" width={size} height={size} aria-hidden="true">
-      <circle cx="32" cy="32" r="29" fill="none" stroke={INK} strokeWidth="2" />
+      {shape === "circle" && (
+        <circle cx="32" cy="32" r="29" fill="none" stroke={INK} strokeWidth="2" />
+      )}
+      {shape === "square" && (
+        <rect x="5" y="5" width="54" height="54" fill="none" stroke={INK} strokeWidth="2" />
+      )}
+      {shape === "gear" && (
+        <path d={GEAR_PATH} fill="none" stroke={INK} strokeWidth="2" strokeLinejoin="round" />
+      )}
       <g
         fill="none"
         stroke={GLYPH_INK[kind] ?? INK}

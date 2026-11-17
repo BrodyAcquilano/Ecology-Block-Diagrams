@@ -1,11 +1,11 @@
 // Symbols tab
 // Symbol on the left, definition on the right.
-// The picture shows how the symbol looks: a circle with the
-// symbol drawn inside it, drawn the same way as in the Muse space.
-// The outside circle is white for every symbol.
+// The outline of the picture says what kind of thing it is:
+// a white circle for normal signals and operators, a white
+// square for transforms, a gear for control signals.
 // Inside lines: white for operators, heat-orange for signals,
-// red for transforms.
-// Sorted into Operators, Signals and Transforms.
+// red for transforms and thermodynamic signals.
+// Sorted into Operators, Signals, Control signals and Transforms.
 import symbols from "../data/symbols.json";
 import { SymbolGlyph } from "../components/SymbolGlyph";
 
@@ -20,6 +20,7 @@ type Sym = {
 const GROUPS: { key: string; title: string }[] = [
   { key: "operator", title: "Operators" },
   { key: "signal", title: "Signals" },
+  { key: "control", title: "Control signals" },
   { key: "transform", title: "Transforms" },
 ];
 

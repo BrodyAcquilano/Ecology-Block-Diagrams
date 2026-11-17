@@ -63,10 +63,10 @@
     "sortOrder": 9
   },
   {
-    "definition": "What it represents is a signal that no longer changes: one value, held. It is the end of the chain — the value of Q at a point after the transient has been filtered away, Q constant at steady state — the state the whole system was travelling toward from the moment the difference operator measured the gap. Every earlier step exists to produce this: a settled value, at a place, that stays where it is until the setting changes again.",
-    "group": "signal",
-    "kind": "constant",
-    "name": "Constant signal",
+    "kind": "thermostat",
+    "name": "Thermostat signal",
+    "definition": "What it represents is the thermostat setting: the set temperature T_s, dialled in and held — a control signal, the value the heat signal is told to settle to. It does not change with time: while it is set, it is constant, and everything else in the system chases it. Turn the dial and T_s takes a new value; between turns, it is a constant signal. Function type: constant. It is drawn with a gear around the outside and a dial inside, so control signals can be told apart at a glance.",
+    "group": "control",
     "sortOrder": 10
   },
   {
