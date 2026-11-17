@@ -82,10 +82,13 @@ export function ExponentialTransform() {
       <p className="component-intro">
         The thermodynamic filter: a temperature that is constant in time and
         falls off exponentially with distance <MathText tex="x" /> — the
-        attenuation of heat as it travels through a medium. Used for
-        temperature, thermodynamics, heat exchange. The equation along{" "}
-        <MathText tex="x" /> is first-order linear; its solution is an
-        exponential in position.
+        attenuation of heat as it travels through a medium. The signal it
+        generates is that attenuation over space,{" "}
+        <MathText tex="\alpha(x) = e^{-cx}" />: the factor a temperature
+        signal is reduced by after travelling the distance{" "}
+        <MathText tex="x" />. Used for temperature, thermodynamics, heat
+        exchange. The equation along <MathText tex="x" /> is first-order
+        linear; its solution is an exponential in position.
       </p>
       <div className="component-controls">
         <label>

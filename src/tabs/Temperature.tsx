@@ -55,6 +55,7 @@ const LABELS: DiagramLabel[] = [
   { x: 580, y: 90, tex: "T(t)" },
   { x: 390, y: 175, tex: "T(t)" },
   { x: 772, y: 90, tex: "T(t, x)" },
+  { x: 670, y: 152, tex: "\\alpha(x)" },
   { x: 90, y: 142, text: "Thermostat" },
   { x: 290, y: 142, text: "Difference operator" },
   { x: 490, y: 142, text: "Heat Source" },

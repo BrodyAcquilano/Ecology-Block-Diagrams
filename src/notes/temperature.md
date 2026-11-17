@@ -43,10 +43,16 @@ $$
 T(t) = T_s + \left( T_o - T_s \right) e^{-kt}
 $$
 
-On its way out, that signal, T(t), reaches the mixer, where the thermodynamic filter's attenuation is mixed in — the fall-off of temperature with distance x:
+On its way out, that signal, T(t), reaches the mixer. The thermodynamic filter's signal is mixed in there too — the attenuation over space:
 
 $$
-T(x) = T_{end} + \left( T(0) - T_{end} \right) e^{-cx}
+\alpha(x) = e^{-cx}
+$$
+
+Mixed with the attenuation, the temperature at position x is:
+
+$$
+T(t, x) = T_{end} + \left( T(t) - T_{end} \right) \alpha(x)
 $$
 
 What leaves the mixer is just a line. The signal measured on it is T(t, x): the temperature at that point, at that time.

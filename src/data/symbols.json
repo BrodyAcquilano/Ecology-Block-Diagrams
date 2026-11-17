@@ -42,7 +42,7 @@
     "sortOrder": 10
   },
   {
-    "definition": "What it represents is a component: a filter. It generates a transform — temperature falling off with distance: a temperature that is constant in time at every point, but whose value falls exponentially as position x grows — the attenuation of heat as it travels through a medium. Its value at position x is set by three numbers: the temperature at x = 0, the end temperature it falls toward as x grows, and the cutoff rate, which sets how fast the fall happens — a large cutoff rate spends the heat quickly, a small one lets it reach far. The equation along x, dT/dx = −c(T − T_end), is first-order linear, and its solution is an exponential in position rather than in time, so nothing in it ever changes with time.",
+    "definition": "What it represents is a component: a filter. It generates a transform — temperature falling off with distance: a temperature that is constant in time at every point, but whose value falls exponentially as position x grows — the attenuation of heat as it travels through a medium. The signal it generates is the attenuation itself: α(x) = e^(−cx), the factor a temperature signal is reduced by after travelling the distance x. Its value at position x is set by three numbers: the temperature at x = 0, the end temperature it falls toward as x grows, and the cutoff rate, which sets how fast the fall happens — a large cutoff rate spends the heat quickly, a small one lets it reach far. The equation along x, dT/dx = −c(T − T_end), is first-order linear, and its solution is an exponential in position rather than in time, so nothing in it ever changes with time.",
     "group": "transform",
     "kind": "transform",
     "name": "Thermodynamic filter",
