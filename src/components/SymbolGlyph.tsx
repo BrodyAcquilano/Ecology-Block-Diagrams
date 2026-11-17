@@ -33,11 +33,15 @@ export const GLYPHS: Record<string, ReactNode> = {
   boltzmann: (
     <path d="M10 48 C 16 47, 20 20, 27 16 C 34 12, 37 26, 42 38 C 46 46, 50 48, 54 48" />
   ),
-  // Heat signal — a fire: an outer flame with a smaller flame inside it
-  heat: (
+  // Temperature signal — a thermometer: a tube with tick marks
+  // beside it, a mercury column inside, and a bulb at the bottom
+  temperature: (
     <>
-      <path d="M32 10 C 35 18, 43 24, 43 35 C 43 45, 38 52, 32 52 C 26 52, 21 45, 21 35 C 21 28, 24 23, 27 18 C 28 22, 29 24, 31 25 C 30 20, 31 15, 32 10 Z" />
-      <path d="M32 34 C 34 37, 36 39, 36 42 C 36 46, 34 48, 32 48 C 30 48, 28 46, 28 42 C 28 39, 30 37, 32 34 Z" />
+      <path d="M28 10 L28 35 C28 39, 24.5 41.5, 24.5 46.5 A7.5 7.5 0 1 0 39.5 46.5 C39.5 41.5, 36 39, 36 35 L36 10 A4 4 0 0 0 28 10 Z" />
+      <line x1="32" y1="24" x2="32" y2="43" strokeWidth="4" />
+      <line x1="39" y1="16" x2="43" y2="16" />
+      <line x1="39" y1="24" x2="43" y2="24" />
+      <line x1="39" y1="32" x2="43" y2="32" />
     </>
   ),
   // Control signals — thermostat: a dial. Tick lines in an arc
@@ -69,7 +73,7 @@ export const GLYPH_INK: Record<string, string> = {
   addition: INK,
   mixer: INK,
   boltzmann: SIGNAL_INK,
-  heat: TRANSFORM_INK,
+  temperature: TRANSFORM_INK,
   thermostat: TRANSFORM_INK,
   transform: TRANSFORM_INK,
 };

@@ -23,8 +23,8 @@
   {
     "definition": "What it represents is a temperature signal: a temperature T settling from its previous value T_o toward the set value T_s, closing at a rate proportional to the gap that remains. The differential equation is Newton's law of cooling, dT/dt = −k(T − T_s) — first-order linear, solved by separation of variables — and its solution is T(t) = T_s + (T_o − T_s)·e^(−kt), where k is Boltzmann's constant, a fixed constant of the model. Function type of the solution: exponential. Whether it climbs or falls is set by the sign of T_s − T_o: heating and cooling are the same signal, closing the gap from opposite sides.",
     "group": "environmental",
-    "kind": "heat",
-    "name": "Heat Signal",
+    "kind": "temperature",
+    "name": "Temperature signal",
     "sortOrder": 6
   },
   {
@@ -37,7 +37,7 @@
   {
     "kind": "thermostat",
     "name": "Thermostat signal",
-    "definition": "What it represents is the thermostat setting: the set temperature T_s, dialled in and held — a control signal, the value the heat signal is told to settle to. It does not change with time: while it is set, it is constant, and everything else in the system chases it. Turn the dial and T_s takes a new value; between turns, it is a constant signal. Function type: constant. It is drawn with a gear around the outside and a dial inside, so control signals can be told apart at a glance.",
+    "definition": "What it represents is the thermostat setting: the set temperature T_s, dialled in and held — a control signal, the value the temperature signal is told to settle to. It does not change with time: while it is set, it is constant, and everything else in the system chases it. Turn the dial and T_s takes a new value; between turns, it is a constant signal. Function type: constant. It is drawn with a gear around the outside and a dial inside, so control signals can be told apart at a glance.",
     "group": "control",
     "sortOrder": 10
   },

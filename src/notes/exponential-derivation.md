@@ -1,4 +1,4 @@
-# Heat Signal — derivation of the solution
+# Temperature signal — derivation of the solution
 
 Differential equation type: first-order linear (Newton's law of cooling), solved by separation of variables.
 
@@ -14,7 +14,7 @@ Contents:
 
 ## 1. The general form
 
-A heat signal is a temperature T settling from its previous temperature T_o toward the set temperature T_s. It closes at a rate proportional to the gap that remains — Newton's law of cooling:
+A temperature signal is a temperature T settling from its previous temperature T_o toward the set temperature T_s. It closes at a rate proportional to the gap that remains — Newton's law of cooling:
 
 $$
 \frac{dT}{dt} = -k \left( T - T_s \right)

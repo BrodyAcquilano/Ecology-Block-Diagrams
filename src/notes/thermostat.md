@@ -9,7 +9,7 @@ Contents:
 
 ## 1. What it is
 
-The thermostat signal is the setting: the set temperature T_s, dialled in on the thermostat and held. It is a control signal — the value the rest of the system is told to reach. The heat signal settles to it; the dial is what sets it.
+The thermostat signal is the setting: the set temperature T_s, dialled in on the thermostat and held. It is a control signal — the value the rest of the system is told to reach. The temperature signal settles to it; the dial is what sets it.
 
 ## 2. The equation
 

@@ -59,7 +59,7 @@ export function Thermostat() {
       </div>
       <p className="component-intro">
         The thermostat setting: the set temperature <MathText tex="T_s" />,
-        held constant. It is the value the heat signal settles to — turn the
+        held constant. It is the value the temperature signal settles to — turn the
         dial and the line moves; between turns it does not change. Function
         type: constant.
       </p>

@@ -1,4 +1,4 @@
-// Heat Signal — reusable component
+// Temperature signal — reusable component
 // (file: Exponential.tsx)
 // A temperature T settling from its previous value T_o to the
 // set value T_s, following Newton's law of cooling:
@@ -19,7 +19,7 @@ import note from "../notes/exponential-derivation.md?raw";
 // In the graph's normalised time units it sets the settling rate.
 const K = 0.7;
 
-export function HeatSignal() {
+export function TemperatureSignal() {
   const [To, setTo] = useState(80);
   const [Ts, setTs] = useState(25);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -97,8 +97,8 @@ export function HeatSignal() {
   return (
     <div>
       <div className="component-header">
-        <SymbolGlyph kind="heat" size={56} />
-        <h2 className="component-title">Heat Signal</h2>
+        <SymbolGlyph kind="temperature" size={56} />
+        <h2 className="component-title">Temperature signal</h2>
       </div>
       <p className="component-intro">
         A temperature settling: <MathText tex="T" /> starts at its previous
