@@ -52,8 +52,9 @@ const LINKS: DiagramLink[] = [
 
 const LABELS: DiagramLabel[] = [
   { x: 190, y: 90, tex: "T_s" },
-  { x: 390, y: 175, tex: "T_o" },
-  { x: 772, y: 90, tex: "T(x)" },
+  { x: 580, y: 90, tex: "T(t)" },
+  { x: 390, y: 175, tex: "T(t)" },
+  { x: 772, y: 90, tex: "T(t, x)" },
   { x: 90, y: 142, text: "Thermostat" },
   { x: 290, y: 142, text: "Difference operator" },
   { x: 490, y: 142, text: "Heat Source" },

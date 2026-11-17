@@ -19,7 +19,7 @@ $$
 T_s
 $$
 
-The heat source's own temperature is fed back to the difference operator along the loop below the chain. At the start it is:
+The heat source's own temperature, T(t), is fed back to the difference operator along the loop below the chain. At the start it is:
 
 $$
 T(0) = T_o
@@ -43,10 +43,10 @@ $$
 T(t) = T_s + \left( T_o - T_s \right) e^{-kt}
 $$
 
-On its way out, that signal reaches the mixer, where the thermodynamic filter's attenuation is mixed in — the fall-off of temperature with distance x:
+On its way out, that signal, T(t), reaches the mixer, where the thermodynamic filter's attenuation is mixed in — the fall-off of temperature with distance x:
 
 $$
 T(x) = T_{end} + \left( T(0) - T_{end} \right) e^{-cx}
 $$
 
-What leaves the mixer is just a line. The signal measured on it is the temperature at that point.
+What leaves the mixer is just a line. The signal measured on it is T(t, x): the temperature at that point, at that time.
