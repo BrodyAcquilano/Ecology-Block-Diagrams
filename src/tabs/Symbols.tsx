@@ -8,12 +8,10 @@ import symbols from "../data/symbols.json";
 
 const INK = "#e8e8e8";
 
-function Glyph({ circle = true, children }: { circle?: boolean; children: ReactNode }) {
+function Glyph({ children }: { children: ReactNode }) {
   return (
     <svg viewBox="0 0 64 64" width="64" height="64" aria-hidden="true">
-      {circle && (
-        <circle cx="32" cy="32" r="29" fill="none" stroke={INK} strokeWidth="2" />
-      )}
+      <circle cx="32" cy="32" r="29" fill="none" stroke={INK} strokeWidth="2" />
       <g fill="none" stroke={INK} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         {children}
       </g>
@@ -40,6 +38,14 @@ const GLYPHS: Record<string, ReactNode> = {
       <line x1="26.4" y1="50.4" x2="50.4" y2="26.4" />
       <line x1="13.6" y1="37.6" x2="37.6" y2="13.6" />
     </>
+  ),
+  // Envelope converter — a dashed diamond with its sides caved in,
+  // inside a circle like every other symbol
+  envelope: (
+    <path
+      d="M32 10 Q 39 25, 54 32 Q 39 39, 32 54 Q 25 39, 10 32 Q 25 25, 32 10 Z"
+      strokeDasharray="4 3"
+    />
   ),
   mixer: (
     <>
@@ -70,11 +76,6 @@ const GLYPHS: Record<string, ReactNode> = {
   constant: <line x1="3" y1="32" x2="61" y2="32" />,
 };
 
-// The envelope converter is the dashed diamond itself, not a circle.
-const NO_CIRCLE: Record<string, boolean> = { envelope: true };
-const ENVELOPE_PATH =
-  "M32 6 Q 40 24, 58 32 Q 40 40, 32 58 Q 24 40, 6 32 Q 24 24, 32 6 Z";
-
 type Sym = {
   kind: string;
   name: string;
@@ -103,13 +104,7 @@ export function Symbols() {
               .map((s) => (
                 <div className="symbol-row" key={s.kind}>
                   <div className="symbol-glyph">
-                    <Glyph circle={!NO_CIRCLE[s.kind]}>
-                      {s.kind === "envelope" ? (
-                        <path d={ENVELOPE_PATH} strokeDasharray="4 3" />
-                      ) : (
-                        GLYPHS[s.kind] ?? null
-                      )}
-                    </Glyph>
+                    <Glyph>{GLYPHS[s.kind] ?? null}</Glyph>
                   </div>
                   <div>
                     <div className="symbol-name">{s.name}</div>
