@@ -2,14 +2,26 @@
 // A list of reusable components, grouped the same way as the
 // symbols: Signals, Operators and Transforms.
 // Operators is empty for now.
+// Each entry in the list shows the component's symbol beside
+// its name.
 import { useState } from "react";
 import { Exponential } from "../components/Exponential";
 import { ExponentialTransform } from "../components/ExponentialTransform";
+import { SymbolGlyph } from "../components/SymbolGlyph";
 
-const GROUPS: { title: string; items: string[] }[] = [
-  { title: "Signals", items: ["Exponential", "Oscillator"] },
+const GROUPS: { title: string; items: { name: string; kind: string }[] }[] = [
+  {
+    title: "Signals",
+    items: [
+      { name: "Exponential", kind: "exponential" },
+      { name: "Oscillator", kind: "oscillator" },
+    ],
+  },
   { title: "Operators", items: [] },
-  { title: "Transforms", items: ["Exponential transform"] },
+  {
+    title: "Transforms",
+    items: [{ name: "Exponential transform", kind: "transform" }],
+  },
 ];
 
 export function Components() {
@@ -23,11 +35,12 @@ export function Components() {
             {g.items.length === 0 && <p className="empty-note">Empty for now.</p>}
             {g.items.map((c) => (
               <button
-                key={c}
-                className={c === active ? "active" : ""}
-                onClick={() => setActive(c)}
+                key={c.name}
+                className={c.name === active ? "active" : ""}
+                onClick={() => setActive(c.name)}
               >
-                {c}
+                <SymbolGlyph kind={c.kind} size={26} />
+                {c.name}
               </button>
             ))}
           </div>

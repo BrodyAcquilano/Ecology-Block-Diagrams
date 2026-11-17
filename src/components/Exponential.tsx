@@ -7,6 +7,7 @@
 // The derivation of the solution is in the note below the graph.
 import { useEffect, useRef, useState } from "react";
 import { MarkdownNote } from "./MarkdownNote";
+import { SymbolGlyph } from "./SymbolGlyph";
 import note from "../notes/exponential-derivation.md?raw";
 
 export function Exponential() {
@@ -89,6 +90,15 @@ export function Exponential() {
 
   return (
     <div>
+      <div className="component-header">
+        <SymbolGlyph kind="exponential" size={56} />
+        <h2 className="component-title">Exponential</h2>
+      </div>
+      <p className="component-intro">
+        A signal that closes on its target value at a rate proportional to the
+        gap that remains — the settling behind Newton's law of cooling. Used
+        for temperature, and for any other quantity that settles the same way.
+      </p>
       <div className="component-controls">
         <label>
           Starting value A(0): {A0}

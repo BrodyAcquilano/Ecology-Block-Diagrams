@@ -18,6 +18,7 @@ const TREE: { name: string; depth: number; folder?: boolean }[] = [
   { name: "components", depth: 1, folder: true },
   { name: "Header.tsx", depth: 2 },
   { name: "MarkdownNote.tsx", depth: 2 },
+  { name: "SymbolGlyph.tsx", depth: 2 },
   { name: "Oscillator.tsx", depth: 2 },
   { name: "Attenuation.tsx", depth: 2 },
   { name: "Exponential.tsx", depth: 2 },

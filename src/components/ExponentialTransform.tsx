@@ -7,6 +7,7 @@
 // component: the graph is a heat distribution along x,
 // from x = 0 to x = n.
 import { useEffect, useRef, useState } from "react";
+import { SymbolGlyph } from "./SymbolGlyph";
 
 export function ExponentialTransform() {
   const [initial, setInitial] = useState(100);
@@ -73,6 +74,16 @@ export function ExponentialTransform() {
 
   return (
     <div>
+      <div className="component-header">
+        <SymbolGlyph kind="transform" size={56} />
+        <h2 className="component-title">Exponential transform</h2>
+      </div>
+      <p className="component-intro">
+        The thermodynamic distance filter: a quantity that is constant in time
+        and falls off exponentially with distance — the attenuation of a signal
+        as it travels through a medium. Used for temperature, thermodynamics,
+        heat exchange.
+      </p>
       <div className="component-controls">
         <label>
           Initial value: {initial}
