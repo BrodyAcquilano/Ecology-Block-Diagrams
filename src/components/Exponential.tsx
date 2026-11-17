@@ -1,8 +1,8 @@
 // Exponential — reusable component
-// A quantity Q settles from its starting value A to its target
-// value B at a rate set by the constant k, following the general
-// solution Q(t) = B + (A - B) * e^(-k t) — the Newton's law of
-// cooling form. Sliders set A, B and k; the graph below follows
+// A quantity A settles from its starting value B to its target
+// value C at a rate set by the constant k, following the general
+// solution A(t) = C + (B - C) * e^(-k t) — the Newton's law of
+// cooling form. Sliders set B, C and k; the graph below follows
 // the solution live, transient first, then the steady state.
 // The derivation of the solution is in the note below the graph.
 import { useEffect, useRef, useState } from "react";
@@ -10,8 +10,8 @@ import { MarkdownNote } from "./MarkdownNote";
 import note from "../notes/exponential-derivation.md?raw";
 
 export function Exponential() {
-  const [A, setA] = useState(80);
-  const [B, setB] = useState(25);
+  const [B, setB] = useState(80);
+  const [C, setC] = useState(25);
   const [k, setK] = useState(0.7);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -32,14 +32,14 @@ export function Exponential() {
       const padR = 12;
       const padT = 14;
       const padB = 28;
-      const lo = Math.min(A, B);
-      const hi = Math.max(A, B);
+      const lo = Math.min(B, C);
+      const hi = Math.max(B, C);
       const span = Math.max(hi - lo, 10);
       const yMin = lo - span * 0.25;
       const yMax = hi + span * 0.25;
       const x = (t: number) => padL + (t / T_MAX) * (W - padL - padR);
-      const y = (q: number) =>
-        padT + (1 - (q - yMin) / (yMax - yMin)) * (H - padT - padB);
+      const y = (a: number) =>
+        padT + (1 - (a - yMin) / (yMax - yMin)) * (H - padT - padB);
       ctx.clearRect(0, 0, W, H);
       // Axes
       ctx.strokeStyle = "#3a3d42";
@@ -48,20 +48,20 @@ export function Exponential() {
       ctx.lineTo(padL, H - padB);
       ctx.lineTo(W - padR, H - padB);
       ctx.stroke();
-      // Steady state line at B
+      // Steady state line at C
       ctx.strokeStyle = "#e8e8e8";
       ctx.setLineDash([5, 4]);
       ctx.beginPath();
-      ctx.moveTo(padL, y(B));
-      ctx.lineTo(W - padR, y(B));
+      ctx.moveTo(padL, y(C));
+      ctx.lineTo(W - padR, y(C));
       ctx.stroke();
       ctx.setLineDash([]);
       ctx.fillStyle = "#e8e8e8";
       ctx.font = "12px system-ui";
-      ctx.fillText("steady state  B = " + B, padL + 6, y(B) - 6);
-      ctx.fillText("A = " + A, padL + 6, y(A) + (A > B ? -6 : 14));
+      ctx.fillText("steady state  C = " + C, padL + 6, y(C) - 6);
+      ctx.fillText("B = " + B, padL + 6, y(B) + (B > C ? -6 : 14));
       ctx.fillText("t", W - padR - 10, H - 8);
-      ctx.fillText("Q", 8, padT + 4);
+      ctx.fillText("A", 8, padT + 4);
       // The solution curve, drawn up to the moving time point
       ctx.strokeStyle = "#ff8c3a";
       ctx.lineWidth = 2;
@@ -69,40 +69,29 @@ export function Exponential() {
       const steps = Math.max(2, Math.floor(tNow * 30));
       for (let i = 0; i <= steps; i++) {
         const t = i / 30;
-        const q = B + (A - B) * Math.exp(-k * t);
-        if (i === 0) ctx.moveTo(x(t), y(q));
-        else ctx.lineTo(x(t), y(q));
+        const a = C + (B - C) * Math.exp(-k * t);
+        if (i === 0) ctx.moveTo(x(t), y(a));
+        else ctx.lineTo(x(t), y(a));
       }
       ctx.stroke();
       ctx.lineWidth = 1;
       // Moving point on the curve
-      const qNow = B + (A - B) * Math.exp(-k * tNow);
+      const aNow = C + (B - C) * Math.exp(-k * tNow);
       ctx.fillStyle = "#ff8c3a";
       ctx.beginPath();
-      ctx.arc(x(tNow), y(qNow), 4, 0, Math.PI * 2);
+      ctx.arc(x(tNow), y(aNow), 4, 0, Math.PI * 2);
       ctx.fill();
       raf = requestAnimationFrame(draw);
     };
     raf = requestAnimationFrame(draw);
     return () => cancelAnimationFrame(raf);
-  }, [A, B, k]);
+  }, [B, C, k]);
 
   return (
     <div>
       <div className="component-controls">
         <label>
-          Starting value A: {A}
-          <input
-            type="range"
-            min={0}
-            max={100}
-            step={1}
-            value={A}
-            onChange={(e) => setA(Number(e.target.value))}
-          />
-        </label>
-        <label>
-          Target value B: {B}
+          Starting value B: {B}
           <input
             type="range"
             min={0}
@@ -110,6 +99,17 @@ export function Exponential() {
             step={1}
             value={B}
             onChange={(e) => setB(Number(e.target.value))}
+          />
+        </label>
+        <label>
+          Target value C: {C}
+          <input
+            type="range"
+            min={0}
+            max={100}
+            step={1}
+            value={C}
+            onChange={(e) => setC(Number(e.target.value))}
           />
         </label>
         <label>
