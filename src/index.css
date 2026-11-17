@@ -62,3 +62,15 @@ body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
 .note h2 { font-size: 17px; margin-top: 22px; }
 .note a { color: #7db8ff; }
 .note .katex-display { display: block; text-align: center; margin: 12px 0; }
+
+/* Temperature tab graphs, side by side */
+.temp-graphs { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 18px; }
+.temp-graphs .component-graph-wrap { width: 400px; }
+
+/* Block diagrams (reusable container): symbols placed at x/y,
+   links drawn on an SVG underlay between outline points,
+   label boxes centred on their x/y */
+.block-diagram { position: relative; border: 1px solid #34373c; background: #1f2226; border-radius: 8px; margin-bottom: 18px; max-width: 100%; }
+.diagram-links { position: absolute; left: 0; top: 0; }
+.diagram-node { position: absolute; transform: translate(-50%, -50%); line-height: 0; }
+.label-box { position: absolute; transform: translate(-50%, -50%); border: 1px solid #34373c; border-radius: 6px; padding: 3px 8px; white-space: nowrap; }
