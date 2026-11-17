@@ -7,10 +7,10 @@ body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
 .app-title { font-size: 20px; font-weight: 700; }
 .app-logo { width: 40px; height: 40px; display: block; }
 
-/* Tab bar */
-.tabs { display: flex; gap: 4px; padding: 8px 12px 0; border-bottom: 1px solid #34373c; background: #1f2226; overflow-x: auto; }
-.tabs button { border: 1px solid #3a3d42; border-bottom: none; background: #26292e; color: inherit; padding: 6px 14px; border-radius: 6px 6px 0 0; cursor: pointer; font: inherit; white-space: nowrap; }
-.tabs button.active { background: #2e3237; font-weight: 600; }
+/* Tab bar — large green tabs spread across the width, white font */
+.tabs { display: flex; gap: 6px; padding: 10px 12px 0; border-bottom: 1px solid #34373c; background: #1f2226; }
+.tabs button { flex: 1 1 0; border: 1px solid #256b29; border-bottom: none; background: #2e7d32; color: #ffffff; padding: 12px 10px; font-family: inherit; font-size: 16px; border-radius: 8px 8px 0 0; cursor: pointer; white-space: nowrap; }
+.tabs button.active { background: #43a047; font-weight: 700; }
 .tab-body { padding: 16px; }
 
 /* Code Editor tab */
