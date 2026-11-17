@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Header } from "./components/Header";
 import { CodeEditor } from "./tabs/CodeEditor";
 import { Symbols } from "./tabs/Symbols";
 import { Components } from "./tabs/Components";
@@ -12,6 +13,7 @@ export function App() {
   const [active, setActive] = useState(tabs[0]);
   return (
     <div>
+      <Header />
       <nav className="tabs">{tabs.map((t) => <button key={t} className={t === active ? "active" : ""} onClick={() => setActive(t)}>{t}</button>)}</nav>
       <main className="tab-body">
         {active === "Code Editor" && <CodeEditor />}
