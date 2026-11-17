@@ -14,7 +14,7 @@ export function App() {
   return (
     <div>
       <Header />
-      <nav className="tabs">{tabs.map((t) => <button key={t} className={t === active ? "active" : ""} onClick={() => setActive(t)}>{t}</button>)}</nav>
+      <nav className="tabs">{tabs.map((t, i) => <button key={t} className={t === active ? "active" : ""} onClick={() => setActive(t)}>{i + 1}. {t}</button>)}</nav>
       <main className="tab-body">
         {active === "Code Editor" && <CodeEditor />}
         {active === "Symbols" && <Symbols />}

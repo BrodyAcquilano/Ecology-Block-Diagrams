@@ -35,3 +35,22 @@ body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
 .symbol-glyph svg { display: block; }
 .symbol-name { font-weight: 600; margin-bottom: 4px; }
 .symbol-def { white-space: pre-wrap; line-height: 1.45; }
+
+/* Components tab */
+.components-layout { display: flex; gap: 16px; align-items: flex-start; }
+.components-list { display: flex; flex-direction: column; gap: 6px; flex: 0 0 180px; }
+.components-list button { border: 1px solid #3a3d42; background: #26292e; color: inherit; border-radius: 6px; padding: 8px 10px; cursor: pointer; font: inherit; text-align: left; }
+.components-list button.active { background: #2e7d32; color: #ffffff; font-weight: 600; }
+.components-body { flex: 1; min-width: 0; }
+.empty-note { color: #9aa0a3; }
+.component-controls { display: flex; flex-direction: column; gap: 10px; max-width: 560px; margin-bottom: 12px; }
+.component-controls label { display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
+.component-controls input[type="range"] { width: 100%; }
+.component-graph { background: #1b1d20; border: 1px solid #33363b; border-radius: 8px; max-width: 100%; }
+
+/* Notes (markdown + KaTeX) */
+.note { max-width: 720px; line-height: 1.55; }
+.note h1 { font-size: 22px; }
+.note h2 { font-size: 17px; margin-top: 22px; }
+.note a { color: #7db8ff; }
+.note .katex-display { display: block; text-align: center; margin: 12px 0; }
