@@ -1,17 +1,17 @@
 // Exponential — reusable component
-// A quantity A settles from its starting value B to its target
-// value C at a rate set by the constant k, following the general
-// solution A(t) = C + (B - C) * e^(-k t) — the Newton's law of
-// cooling form. Sliders set B, C and k; the graph below follows
-// the solution live, transient first, then the steady state.
+// A quantity A settles from its starting value A(0) to its target
+// value B at a rate set by the constant k, following the general
+// solution A(t) = B + (A(0) - B) * e^(-k t) — the Newton's law
+// of cooling form. Sliders set A(0), B and k; the graph below
+// follows the solution live, transient first, then steady state.
 // The derivation of the solution is in the note below the graph.
 import { useEffect, useRef, useState } from "react";
 import { MarkdownNote } from "./MarkdownNote";
 import note from "../notes/exponential-derivation.md?raw";
 
 export function Exponential() {
-  const [B, setB] = useState(80);
-  const [C, setC] = useState(25);
+  const [A0, setA0] = useState(80);
+  const [B, setB] = useState(25);
   const [k, setK] = useState(0.7);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -32,8 +32,8 @@ export function Exponential() {
       const padR = 12;
       const padT = 14;
       const padB = 28;
-      const lo = Math.min(B, C);
-      const hi = Math.max(B, C);
+      const lo = Math.min(A0, B);
+      const hi = Math.max(A0, B);
       const span = Math.max(hi - lo, 10);
       const yMin = lo - span * 0.25;
       const yMax = hi + span * 0.25;
@@ -48,18 +48,18 @@ export function Exponential() {
       ctx.lineTo(padL, H - padB);
       ctx.lineTo(W - padR, H - padB);
       ctx.stroke();
-      // Steady state line at C
+      // Steady state line at B
       ctx.strokeStyle = "#e8e8e8";
       ctx.setLineDash([5, 4]);
       ctx.beginPath();
-      ctx.moveTo(padL, y(C));
-      ctx.lineTo(W - padR, y(C));
+      ctx.moveTo(padL, y(B));
+      ctx.lineTo(W - padR, y(B));
       ctx.stroke();
       ctx.setLineDash([]);
       ctx.fillStyle = "#e8e8e8";
       ctx.font = "12px system-ui";
-      ctx.fillText("steady state  C = " + C, padL + 6, y(C) - 6);
-      ctx.fillText("B = " + B, padL + 6, y(B) + (B > C ? -6 : 14));
+      ctx.fillText("steady state  B = " + B, padL + 6, y(B) - 6);
+      ctx.fillText("A(0) = " + A0, padL + 6, y(A0) + (A0 > B ? -6 : 14));
       ctx.fillText("t", W - padR - 10, H - 8);
       ctx.fillText("A", 8, padT + 4);
       // The solution curve, drawn up to the moving time point
@@ -69,14 +69,14 @@ export function Exponential() {
       const steps = Math.max(2, Math.floor(tNow * 30));
       for (let i = 0; i <= steps; i++) {
         const t = i / 30;
-        const a = C + (B - C) * Math.exp(-k * t);
+        const a = B + (A0 - B) * Math.exp(-k * t);
         if (i === 0) ctx.moveTo(x(t), y(a));
         else ctx.lineTo(x(t), y(a));
       }
       ctx.stroke();
       ctx.lineWidth = 1;
       // Moving point on the curve
-      const aNow = C + (B - C) * Math.exp(-k * tNow);
+      const aNow = B + (A0 - B) * Math.exp(-k * tNow);
       ctx.fillStyle = "#ff8c3a";
       ctx.beginPath();
       ctx.arc(x(tNow), y(aNow), 4, 0, Math.PI * 2);
@@ -85,13 +85,24 @@ export function Exponential() {
     };
     raf = requestAnimationFrame(draw);
     return () => cancelAnimationFrame(raf);
-  }, [B, C, k]);
+  }, [A0, B, k]);
 
   return (
     <div>
       <div className="component-controls">
         <label>
-          Starting value B: {B}
+          Starting value A(0): {A0}
+          <input
+            type="range"
+            min={0}
+            max={100}
+            step={1}
+            value={A0}
+            onChange={(e) => setA0(Number(e.target.value))}
+          />
+        </label>
+        <label>
+          Target value B: {B}
           <input
             type="range"
             min={0}
@@ -99,17 +110,6 @@ export function Exponential() {
             step={1}
             value={B}
             onChange={(e) => setB(Number(e.target.value))}
-          />
-        </label>
-        <label>
-          Target value C: {C}
-          <input
-            type="range"
-            min={0}
-            max={100}
-            step={1}
-            value={C}
-            onChange={(e) => setC(Number(e.target.value))}
           />
         </label>
         <label>
