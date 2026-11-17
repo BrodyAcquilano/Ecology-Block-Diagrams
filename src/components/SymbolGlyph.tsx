@@ -23,17 +23,6 @@ export const GLYPHS: Record<string, ReactNode> = {
       <line x1="32" y1="24" x2="32" y2="40" />
     </>
   ),
-  // Medium change — diagonal lines centred in the circle, 3 and 3 perpendicular
-  medium: (
-    <>
-      <line x1="20" y1="20" x2="44" y2="44" />
-      <line x1="26.4" y1="13.6" x2="50.4" y2="37.6" />
-      <line x1="13.6" y1="26.4" x2="37.6" y2="50.4" />
-      <line x1="20" y1="44" x2="44" y2="20" />
-      <line x1="26.4" y1="50.4" x2="50.4" y2="26.4" />
-      <line x1="13.6" y1="37.6" x2="37.6" y2="13.6" />
-    </>
-  ),
   mixer: (
     <>
       <line x1="23" y1="23" x2="41" y2="41" />
@@ -78,7 +67,6 @@ export const GLYPHS: Record<string, ReactNode> = {
 export const GLYPH_INK: Record<string, string> = {
   difference: INK,
   addition: INK,
-  medium: INK,
   mixer: INK,
   boltzmann: SIGNAL_INK,
   heat: TRANSFORM_INK,

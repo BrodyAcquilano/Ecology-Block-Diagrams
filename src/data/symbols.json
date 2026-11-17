@@ -21,13 +21,6 @@
     "sortOrder": 3
   },
   {
-    "definition": "What it represents is the signal crossing from one medium into another — a quantity passing from the medium that sets it into the medium that receives it — and coming out as the corresponding signal in the new medium: Q in the first medium becomes Q in the second. The two sides are not the same substance and do not respond the same way: the first medium is held at its value, while the second has to be brought there by contact. The medium-change math: the receiving value chases the setting value by the general law dQ/dt = k·(B − Q), so Q(t) = B + (A − B)·e^(−kt) as its mean — an oscillator in the new medium, swinging around the target, with the coupling k set by the contact between the two mediums. The kind of signal does not change across it: oscillator in, oscillator out — what changes is the medium carrying it, and with it the constants that govern it.",
-    "group": "operator",
-    "kind": "medium",
-    "name": "Medium change",
-    "sortOrder": 4
-  },
-  {
     "definition": "What it represents is a temperature signal: a temperature T settling from its previous value T_o toward the set value T_s, closing at a rate proportional to the gap that remains. The differential equation is Newton's law of cooling, dT/dt = −k(T − T_s) — first-order linear, solved by separation of variables — and its solution is T(t) = T_s + (T_o − T_s)·e^(−kt), where k is Boltzmann's constant, a fixed constant of the model. Function type of the solution: exponential. Whether it climbs or falls is set by the sign of T_s − T_o: heating and cooling are the same signal, closing the gap from opposite sides.",
     "group": "environmental",
     "kind": "heat",
