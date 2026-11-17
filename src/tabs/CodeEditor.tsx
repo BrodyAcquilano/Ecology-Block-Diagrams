@@ -21,6 +21,7 @@ const TREE: { name: string; depth: number; folder?: boolean }[] = [
   { name: "Oscillator.tsx", depth: 2 },
   { name: "Attenuation.tsx", depth: 2 },
   { name: "Exponential.tsx", depth: 2 },
+  { name: "ExponentialTransform.tsx", depth: 2 },
   { name: "notes", depth: 1, folder: true },
   { name: "exponential-derivation.md", depth: 2 },
   { name: "assets", depth: 1, folder: true },

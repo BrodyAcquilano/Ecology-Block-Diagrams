@@ -3,21 +3,23 @@
 // The picture shows how the symbol looks: a circle with the
 // symbol drawn inside it, drawn the same way as in the Muse space.
 // The outside circle is white for every symbol.
-// Inside lines: white for operators, heat-orange for signals.
-// Sorted into Operators and Signals.
+// Inside lines: white for operators, heat-orange for signals,
+// red for transforms.
+// Sorted into Operators, Signals and Transforms.
 import type { ReactNode } from "react";
 import symbols from "../data/symbols.json";
 
 const INK = "#e8e8e8";
 const SIGNAL_INK = "#ff8c3a";
+const TRANSFORM_INK = "#e5484d";
 
-function Glyph({ signal = false, children }: { signal?: boolean; children: ReactNode }) {
+function Glyph({ ink, children }: { ink: string; children: ReactNode }) {
   return (
     <svg viewBox="0 0 64 64" width="64" height="64" aria-hidden="true">
       <circle cx="32" cy="32" r="29" fill="none" stroke={INK} strokeWidth="2" />
       <g
         fill="none"
-        stroke={signal ? SIGNAL_INK : INK}
+        stroke={ink}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -83,6 +85,15 @@ const GLYPHS: Record<string, ReactNode> = {
   exponential: <path d="M10 50 C 24 49, 36 44, 43 33 C 48.5 24.5, 50.5 17, 50.5 11" />,
   // Constant — a line across the whole middle of the circle, through both edges
   constant: <line x1="3" y1="32" x2="61" y2="32" />,
+  // Transforms — exponential transform: three wavy radiation lines
+  // centred in the circle, gaps between them, not touching the edges
+  transform: (
+    <>
+      <path d="M16 22 q 4 -5, 8 0 t 8 0 t 8 0 t 8 0" />
+      <path d="M16 32 q 4 -5, 8 0 t 8 0 t 8 0 t 8 0" />
+      <path d="M16 42 q 4 -5, 8 0 t 8 0 t 8 0 t 8 0" />
+    </>
+  ),
 };
 
 type Sym = {
@@ -93,9 +104,10 @@ type Sym = {
   sortOrder: number;
 };
 
-const GROUPS: { key: string; title: string }[] = [
-  { key: "operator", title: "Operators" },
-  { key: "signal", title: "Signals" },
+const GROUPS: { key: string; title: string; ink: string }[] = [
+  { key: "operator", title: "Operators", ink: INK },
+  { key: "signal", title: "Signals", ink: SIGNAL_INK },
+  { key: "transform", title: "Transforms", ink: TRANSFORM_INK },
 ];
 
 export function Symbols() {
@@ -113,7 +125,7 @@ export function Symbols() {
               .map((s) => (
                 <div className="symbol-row" key={s.kind}>
                   <div className="symbol-glyph">
-                    <Glyph signal={s.group === "signal"}>{GLYPHS[s.kind] ?? null}</Glyph>
+                    <Glyph ink={g.ink}>{GLYPHS[s.kind] ?? null}</Glyph>
                   </div>
                   <div>
                     <div className="symbol-name">{s.name}</div>

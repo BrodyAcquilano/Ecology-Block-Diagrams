@@ -39,7 +39,9 @@ body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
 /* Components tab */
 .components-layout { display: flex; gap: 16px; align-items: flex-start; }
 .components-list { display: flex; flex-direction: column; gap: 6px; flex: 0 0 180px; }
-.components-list button { border: 1px solid #3a3d42; background: #26292e; color: inherit; border-radius: 6px; padding: 8px 10px; cursor: pointer; font: inherit; text-align: left; }
+.components-group-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #9aa0a3; margin: 12px 0 6px; }
+.components-list > div:first-child .components-group-title { margin-top: 0; }
+.components-list button { width: 100%; border: 1px solid #3a3d42; background: #26292e; color: inherit; border-radius: 6px; padding: 8px 10px; cursor: pointer; font: inherit; text-align: left; margin-bottom: 6px; }
 .components-list button.active { background: #2e7d32; color: #ffffff; font-weight: 600; }
 .components-body { flex: 1; min-width: 0; }
 .empty-note { color: #9aa0a3; }
