@@ -52,9 +52,7 @@ export const GLYPHS: Record<string, ReactNode> = {
   ),
   // Steady-state filter — hourglass, drawn big in its circle
   filter: <path d="M19 14 L45 14 L34.5 32 L45 50 L19 50 L29.5 32 Z" />,
-  // Signals — one oscillator curve across the whole circle,
-  // connected to the circumference at both ends
-  oscillator: <path d="M3 32 C 12 4, 22 4, 32 32 C 42 60, 52 60, 61 32" />,
+  // Signals — Boltzmann: a distribution curve, not letters
   // Boltzmann — a distribution curve, not letters
   boltzmann: (
     <path d="M10 48 C 16 47, 20 20, 27 16 C 34 12, 37 26, 42 38 C 46 46, 50 48, 54 48" />
@@ -87,7 +85,6 @@ export const GLYPH_INK: Record<string, string> = {
   mixer: INK,
   piecewise: INK,
   filter: INK,
-  oscillator: SIGNAL_INK,
   boltzmann: SIGNAL_INK,
   heat: TRANSFORM_INK,
   constant: SIGNAL_INK,

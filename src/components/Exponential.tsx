@@ -6,10 +6,13 @@
 // Boltzmann's constant — a fixed constant of the model, so it
 // has no slider. Sliders set T_o and T_s; the graph follows the
 // solution live, transient first, then steady state.
+// Variable labels are set in LaTeX (MathText) — before the
+// graph and on the graph itself, as overlays on the canvas.
 // The derivation of the solution is in the note below the graph.
 import { useEffect, useRef, useState } from "react";
 import { MarkdownNote } from "./MarkdownNote";
 import { SymbolGlyph } from "./SymbolGlyph";
+import { MathText } from "./MathText";
 import note from "../notes/exponential-derivation.md?raw";
 
 // Boltzmann's constant — the model's fixed rate constant.
@@ -20,6 +23,15 @@ export function HeatSignal() {
   const [To, setTo] = useState(80);
   const [Ts, setTs] = useState(25);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  // The graph's vertical scale, shared by the canvas drawing and
+  // the LaTeX labels overlaid on it.
+  const lo = Math.min(To, Ts);
+  const hi = Math.max(To, Ts);
+  const span = Math.max(hi - lo, 10);
+  const yMin = lo - span * 0.25;
+  const yMax = hi + span * 0.25;
+  const yPx = (a: number) => 14 + (1 - (a - yMin) / (yMax - yMin)) * (280 - 14 - 28);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -38,16 +50,11 @@ export function HeatSignal() {
       const padR = 12;
       const padT = 14;
       const padB = 28;
-      const lo = Math.min(To, Ts);
-      const hi = Math.max(To, Ts);
-      const span = Math.max(hi - lo, 10);
-      const yMin = lo - span * 0.25;
-      const yMax = hi + span * 0.25;
       const x = (t: number) => padL + (t / T_MAX) * (W - padL - padR);
       const y = (a: number) =>
         padT + (1 - (a - yMin) / (yMax - yMin)) * (H - padT - padB);
       ctx.clearRect(0, 0, W, H);
-      // Axes
+      // Axes (labels are LaTeX overlays, not canvas text)
       ctx.strokeStyle = "#3a3d42";
       ctx.beginPath();
       ctx.moveTo(padL, padT);
@@ -62,12 +69,6 @@ export function HeatSignal() {
       ctx.lineTo(W - padR, y(Ts));
       ctx.stroke();
       ctx.setLineDash([]);
-      ctx.fillStyle = "#e8e8e8";
-      ctx.font = "12px system-ui";
-      ctx.fillText("steady state  T_s = " + Ts, padL + 6, y(Ts) - 6);
-      ctx.fillText("T_o = " + To, padL + 6, y(To) + (To > Ts ? -6 : 14));
-      ctx.fillText("t", W - padR - 10, H - 8);
-      ctx.fillText("T", 8, padT + 4);
       // The solution curve, drawn up to the moving time point
       ctx.strokeStyle = "#e5484d";
       ctx.lineWidth = 2;
@@ -91,7 +92,7 @@ export function HeatSignal() {
     };
     raf = requestAnimationFrame(draw);
     return () => cancelAnimationFrame(raf);
-  }, [To, Ts]);
+  }, [To, Ts, yMin, yMax]);
 
   return (
     <div>
@@ -100,14 +101,17 @@ export function HeatSignal() {
         <h2 className="component-title">Heat Signal</h2>
       </div>
       <p className="component-intro">
-        A temperature settling: T starts at its previous value T_o and closes
-        on the set temperature T_s at a rate proportional to the gap that
+        A temperature settling: <MathText tex="T" /> starts at its previous
+        value <MathText tex="T_o" /> and closes on the set temperature{" "}
+        <MathText tex="T_s" /> at a rate proportional to the gap that
         remains — Newton's law of cooling. The differential equation is
         first-order linear; its solution is exponential.
       </p>
       <div className="component-controls">
         <label>
-          Previous temperature T_o: {To}
+          <span>
+            Previous temperature <MathText tex="T_o" />: {To}
+          </span>
           <input
             type="range"
             min={0}
@@ -118,7 +122,9 @@ export function HeatSignal() {
           />
         </label>
         <label>
-          Set temperature T_s: {Ts}
+          <span>
+            Set temperature <MathText tex="T_s" />: {Ts}
+          </span>
           <input
             type="range"
             min={0}
@@ -128,9 +134,28 @@ export function HeatSignal() {
             onChange={(e) => setTs(Number(e.target.value))}
           />
         </label>
-        <p className="empty-note">Rate constant k: Boltzmann's constant — fixed, no slider.</p>
+        <p className="empty-note">
+          Rate constant <MathText tex="k" />: Boltzmann's constant — fixed, no slider.
+        </p>
       </div>
-      <canvas ref={canvasRef} width={560} height={280} className="component-graph" />
+      <div className="component-graph-wrap">
+        <canvas ref={canvasRef} width={560} height={280} className="component-graph" />
+        <span className="graph-label" style={{ left: 50, top: yPx(Ts) - 22 }}>
+          steady state <MathText tex={`T_s = ${Ts}`} />
+        </span>
+        <span
+          className="graph-label"
+          style={{ left: 50, top: To > Ts ? yPx(To) - 22 : yPx(To) + 6 }}
+        >
+          <MathText tex={`T_o = ${To}`} />
+        </span>
+        <span className="graph-label" style={{ left: 8, top: 8 }}>
+          <MathText tex="T" />
+        </span>
+        <span className="graph-label" style={{ right: 14, bottom: 4 }}>
+          <MathText tex="t" />
+        </span>
+      </div>
       <MarkdownNote source={note} />
     </div>
   );

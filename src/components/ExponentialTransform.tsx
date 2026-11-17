@@ -7,14 +7,26 @@
 // temperature as x grows, at a rate set by the cutoff. There
 // is no time component: the graph is a heat distribution
 // along x, from x = 0 to x = n.
+// Variable labels are set in LaTeX (MathText) — before the
+// graph and on the graph itself, as overlays on the canvas.
 import { useEffect, useRef, useState } from "react";
 import { SymbolGlyph } from "./SymbolGlyph";
+import { MathText } from "./MathText";
 
 export function ExponentialTransform() {
   const [initial, setInitial] = useState(100);
   const [end, setEnd] = useState(10);
   const [cutoff, setCutoff] = useState(0.45);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  // The graph's vertical scale, shared by the canvas drawing and
+  // the LaTeX labels overlaid on it.
+  const lo = Math.min(initial, end);
+  const hi = Math.max(initial, end);
+  const span = Math.max(hi - lo, 10);
+  const yMin = lo - span * 0.25;
+  const yMax = hi + span * 0.25;
+  const yPx = (a: number) => 14 + (1 - (a - yMin) / (yMax - yMin)) * (280 - 14 - 28);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -28,16 +40,11 @@ export function ExponentialTransform() {
     const padR = 12;
     const padT = 14;
     const padB = 28;
-    const lo = Math.min(initial, end);
-    const hi = Math.max(initial, end);
-    const span = Math.max(hi - lo, 10);
-    const yMin = lo - span * 0.25;
-    const yMax = hi + span * 0.25;
     const x = (pos: number) => padL + (pos / X_MAX) * (W - padL - padR);
     const y = (a: number) =>
       padT + (1 - (a - yMin) / (yMax - yMin)) * (H - padT - padB);
     ctx.clearRect(0, 0, W, H);
-    // Axes
+    // Axes (labels are LaTeX overlays, not canvas text)
     ctx.strokeStyle = "#3a3d42";
     ctx.beginPath();
     ctx.moveTo(padL, padT);
@@ -52,13 +59,6 @@ export function ExponentialTransform() {
     ctx.lineTo(W - padR, y(end));
     ctx.stroke();
     ctx.setLineDash([]);
-    ctx.fillStyle = "#e8e8e8";
-    ctx.font = "12px system-ui";
-    ctx.fillText("end temperature = " + end, padL + 6, y(end) - 6);
-    ctx.fillText("T(0) = " + initial, padL + 6, y(initial) + (initial > end ? -6 : 14));
-    ctx.fillText("0", padL - 3, H - 10);
-    ctx.fillText("x = n", W - padR - 26, H - 10);
-    ctx.fillText("T", 8, padT + 4);
     // The distribution along x
     ctx.strokeStyle = "#e5484d";
     ctx.lineWidth = 2;
@@ -71,7 +71,7 @@ export function ExponentialTransform() {
     }
     ctx.stroke();
     ctx.lineWidth = 1;
-  }, [initial, end, cutoff]);
+  }, [initial, end, cutoff, yMin, yMax]);
 
   return (
     <div>
@@ -81,14 +81,17 @@ export function ExponentialTransform() {
       </div>
       <p className="component-intro">
         The thermodynamic filter: a temperature that is constant in time and
-        falls off exponentially with distance x — the attenuation of heat as
-        it travels through a medium. Used for temperature, thermodynamics,
-        heat exchange. The equation along x is first-order linear; its
-        solution is an exponential in position.
+        falls off exponentially with distance <MathText tex="x" /> — the
+        attenuation of heat as it travels through a medium. Used for
+        temperature, thermodynamics, heat exchange. The equation along{" "}
+        <MathText tex="x" /> is first-order linear; its solution is an
+        exponential in position.
       </p>
       <div className="component-controls">
         <label>
-          Temperature at x = 0: {initial}
+          <span>
+            Temperature at <MathText tex="x = 0" />: {initial}
+          </span>
           <input
             type="range"
             min={0}
@@ -99,7 +102,7 @@ export function ExponentialTransform() {
           />
         </label>
         <label>
-          End temperature: {end}
+          <span>End temperature: {end}</span>
           <input
             type="range"
             min={0}
@@ -110,7 +113,7 @@ export function ExponentialTransform() {
           />
         </label>
         <label>
-          Cutoff rate: {cutoff.toFixed(2)}
+          <span>Cutoff rate: {cutoff.toFixed(2)}</span>
           <input
             type="range"
             min={0.05}
@@ -121,7 +124,27 @@ export function ExponentialTransform() {
           />
         </label>
       </div>
-      <canvas ref={canvasRef} width={560} height={280} className="component-graph" />
+      <div className="component-graph-wrap">
+        <canvas ref={canvasRef} width={560} height={280} className="component-graph" />
+        <span className="graph-label" style={{ left: 50, top: yPx(end) - 22 }}>
+          end temperature = {end}
+        </span>
+        <span
+          className="graph-label"
+          style={{ left: 50, top: initial > end ? yPx(initial) - 22 : yPx(initial) + 6 }}
+        >
+          <MathText tex={`T(0) = ${initial}`} />
+        </span>
+        <span className="graph-label" style={{ left: 8, top: 8 }}>
+          <MathText tex="T" />
+        </span>
+        <span className="graph-label" style={{ left: 40, bottom: 4 }}>
+          0
+        </span>
+        <span className="graph-label" style={{ right: 14, bottom: 4 }}>
+          <MathText tex="x = n" />
+        </span>
+      </div>
     </div>
   );
 }

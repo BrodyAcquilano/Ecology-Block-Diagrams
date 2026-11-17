@@ -14,7 +14,6 @@ const GROUPS: { title: string; items: { name: string; kind: string }[] }[] = [
     title: "Signals",
     items: [
       { name: "Heat Signal", kind: "heat" },
-      { name: "Oscillator", kind: "oscillator" },
     ],
   },
   { title: "Operators", items: [] },
@@ -48,7 +47,6 @@ export function Components() {
       </div>
       <div className="components-body">
         {active === "Heat Signal" && <HeatSignal />}
-        {active === "Oscillator" && <p className="empty-note">Empty for now.</p>}
         {active === "Thermodynamic filter" && <ExponentialTransform />}
       </div>
     </div>

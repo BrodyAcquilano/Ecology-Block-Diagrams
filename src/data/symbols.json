@@ -14,13 +14,6 @@
     "sortOrder": 1
   },
   {
-    "definition": "What it represents is a signal that swings around a target value and settles onto it: it overshoots, comes back, overshoots less, and the swings die away inside a decaying envelope until only the target remains. That is the true shape of the signals in this note before they are simplified: a quantity set to a new value does not glide there — it swings around the target value B as it closes in on it. The smooth exponential is this signal with the swing removed (simplification 6), not the signal itself.",
-    "group": "signal",
-    "kind": "oscillator",
-    "name": "Oscillator signal",
-    "sortOrder": 2
-  },
-  {
     "definition": "What it represents is the spread of values across all the parts of a system at one instant — few near zero, most in the middle, a long tail of a few very large — and the single average value that spread amounts to. It stands for two steps: simplification 3, the whole set of parts and their individual values replaced by this one distribution, and simplification 4, that distribution collapsed by its integral average, ⟨E⟩ = ∫ E · P(E) dE, into the single number the rest of the chain works with. It is made before the diagram even starts and carried through the whole chain — every value anywhere in the diagrams is already this average, not any one part's value.",
     "group": "signal",
     "kind": "boltzmann",
