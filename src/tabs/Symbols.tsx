@@ -2,17 +2,26 @@
 // Symbol on the left, definition on the right.
 // The picture shows how the symbol looks: a circle with the
 // symbol drawn inside it, drawn the same way as in the Muse space.
+// The outside circle is white for every symbol.
+// Inside lines: white for operators, heat-orange for signals.
 // Sorted into Operators and Signals.
 import type { ReactNode } from "react";
 import symbols from "../data/symbols.json";
 
 const INK = "#e8e8e8";
+const SIGNAL_INK = "#ff8c3a";
 
-function Glyph({ children }: { children: ReactNode }) {
+function Glyph({ signal = false, children }: { signal?: boolean; children: ReactNode }) {
   return (
     <svg viewBox="0 0 64 64" width="64" height="64" aria-hidden="true">
       <circle cx="32" cy="32" r="29" fill="none" stroke={INK} strokeWidth="2" />
-      <g fill="none" stroke={INK} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <g
+        fill="none"
+        stroke={signal ? SIGNAL_INK : INK}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         {children}
       </g>
     </svg>
@@ -104,7 +113,7 @@ export function Symbols() {
               .map((s) => (
                 <div className="symbol-row" key={s.kind}>
                   <div className="symbol-glyph">
-                    <Glyph>{GLYPHS[s.kind] ?? null}</Glyph>
+                    <Glyph signal={s.group === "signal"}>{GLYPHS[s.kind] ?? null}</Glyph>
                   </div>
                   <div>
                     <div className="symbol-name">{s.name}</div>
