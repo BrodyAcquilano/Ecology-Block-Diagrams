@@ -1,7 +1,7 @@
-// Thermostat signal — reusable component
-// The thermostat setting: the set temperature T_s, held
-// constant. A control signal — its symbol carries a gear
-// around the outside so control signals can be told apart
+// Thermostat — reusable component
+// The thermostat: it generates a control signal — the set
+// temperature T_s, held constant. Its symbol carries a gear
+// around the outside so control components can be told apart
 // at a glance. One slider slides the constant line up and
 // down; the graph is a straight line at T_s.
 // The short note is below the graph.
@@ -55,13 +55,13 @@ export function Thermostat() {
     <div>
       <div className="component-header">
         <SymbolGlyph kind="thermostat" size={56} />
-        <h2 className="component-title">Thermostat signal</h2>
+        <h2 className="component-title">Thermostat</h2>
       </div>
       <p className="component-intro">
-        The thermostat setting: the set temperature <MathText tex="T_s" />,
-        held constant. It is the value the temperature signal settles to — turn the
-        dial and the line moves; between turns it does not change. Function
-        type: constant.
+        The thermostat generates a control signal: the set temperature{" "}
+        <MathText tex="T_s" />, held constant. It is the value the heat
+        source's temperature settles to — turn the dial and the line moves;
+        between turns it does not change. Function type: constant.
       </p>
       <div className="component-controls">
         <label>

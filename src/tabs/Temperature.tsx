@@ -17,39 +17,48 @@ import { MarkdownNote } from "../components/MarkdownNote";
 import { MathText } from "../components/MathText";
 import note from "../notes/temperature.md?raw";
 
-// The chain, placed by x/y in the BlockDiagram: the
-// temperature at t = 0 (T_o) and the thermostat setting (T_s)
-// into the difference operator; the gap drives a temperature
-// signal; the mixer multiplies it by the thermodynamic
-// filter, feeding up from below; out comes the temperature
-// signal at that point.
+// The diagram, placed by x/y in the BlockDiagram. The blocks
+// are components; the signals are what is measured on the
+// lines between them. The thermostat and the heat source's
+// feedback both reach the difference operator; the gap drives
+// the heat source; its signal is mixed with the thermodynamic
+// filter's attenuation at the mixer; the output is just a
+// line, carrying the temperature signal at that point.
 const NODES: DiagramNode[] = [
-  { id: "tin", symbol: "temperature", x: 70, y: 90 },
-  { id: "tstat", symbol: "thermostat", x: 70, y: 210 },
-  { id: "diff", symbol: "difference", x: 250, y: 150 },
-  { id: "sig", symbol: "temperature", x: 430, y: 150 },
-  { id: "mix", symbol: "mixer", x: 610, y: 150 },
-  { id: "filt", symbol: "transform", x: 610, y: 252 },
-  { id: "out", symbol: "temperature", x: 790, y: 150 },
+  { id: "tstat", symbol: "thermostat", x: 90, y: 90 },
+  { id: "diff", symbol: "difference", x: 290, y: 90 },
+  { id: "heat", symbol: "heatsource", x: 490, y: 90 },
+  { id: "mix", symbol: "mixer", x: 670, y: 90 },
+  { id: "filt", symbol: "transform", x: 670, y: 215 },
 ];
 
 const LINKS: DiagramLink[] = [
-  { from: "tin", to: "diff", fromAnchor: "right", toAnchor: 225 },
-  { from: "tstat", to: "diff", fromAnchor: "right", toAnchor: 135 },
-  { from: "diff", to: "sig", fromAnchor: "right", toAnchor: "left" },
-  { from: "sig", to: "mix", fromAnchor: "right", toAnchor: "left" },
+  { from: "tstat", to: "diff", fromAnchor: "right", toAnchor: "left" },
+  { from: "diff", to: "heat", fromAnchor: "right", toAnchor: "left" },
+  {
+    from: "heat",
+    to: "diff",
+    fromAnchor: "bottom",
+    toAnchor: "bottom",
+    via: [
+      { x: 490, y: 175 },
+      { x: 290, y: 175 },
+    ],
+  },
+  { from: "heat", to: "mix", fromAnchor: "right", toAnchor: "left" },
   { from: "filt", to: "mix", fromAnchor: "top", toAnchor: "bottom" },
-  { from: "mix", to: "out", fromAnchor: "right", toAnchor: "left" },
+  { from: "mix", toPoint: { x: 838, y: 90 }, fromAnchor: "right" },
 ];
 
 const LABELS: DiagramLabel[] = [
-  { x: 70, y: 134, tex: "T_o" },
-  { x: 70, y: 254, tex: "T_s" },
-  { x: 250, y: 198, text: "Difference operator" },
-  { x: 430, y: 198, text: "Temperature signal" },
-  { x: 610, y: 102, text: "Mixer" },
-  { x: 610, y: 300, text: "Thermodynamic filter" },
-  { x: 790, y: 198, text: "Temperature signal" },
+  { x: 190, y: 90, tex: "T_s" },
+  { x: 390, y: 175, tex: "T_o" },
+  { x: 772, y: 90, tex: "T(x)" },
+  { x: 90, y: 142, text: "Thermostat" },
+  { x: 290, y: 142, text: "Difference operator" },
+  { x: 490, y: 142, text: "Heat Source" },
+  { x: 670, y: 40, text: "Mixer" },
+  { x: 670, y: 263, text: "Thermodynamic filter" },
 ];
 
 // Both graphs share the fixed 0-100 scale (with padding) used
@@ -223,7 +232,7 @@ export function Temperature() {
           </div>
         </div>
       </div>
-      <BlockDiagram width={860} height={330} nodes={NODES} links={LINKS} labels={LABELS} />
+      <BlockDiagram width={860} height={290} nodes={NODES} links={LINKS} labels={LABELS} />
       <MarkdownNote source={note} />
     </div>
   );

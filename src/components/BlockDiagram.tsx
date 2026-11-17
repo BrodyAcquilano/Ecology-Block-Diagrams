@@ -26,9 +26,16 @@ export type Anchor = "top" | "right" | "bottom" | "left" | number;
 
 export interface DiagramLink {
   from: string;
-  to: string;
+  // The node the line runs to — or omit it and give toPoint
+  // instead, for a line that just runs out of the diagram
+  // (an output: the signal on it is measured at the edge).
+  to?: string;
+  toPoint?: { x: number; y: number };
   fromAnchor?: Anchor;
   toAnchor?: Anchor;
+  // Waypoints the line runs through, in order — for lines
+  // that have to bend, like a feedback loop.
+  via?: { x: number; y: number }[];
 }
 
 export type DiagramLabel = LabelBoxSpec;
@@ -83,10 +90,24 @@ export function BlockDiagram({
         </defs>
         {links.map((l, i) => {
           const a = byId.get(l.from);
-          const b = byId.get(l.to);
-          if (!a || !b) return null;
+          if (!a) return null;
           const p = anchorPoint(a, l.fromAnchor);
-          const q = anchorPoint(b, l.toAnchor);
+          const b = l.to ? byId.get(l.to) : undefined;
+          const q = l.toPoint ?? (b ? anchorPoint(b, l.toAnchor) : null);
+          if (!q) return null;
+          if (l.via && l.via.length > 0) {
+            const pts = [p, ...l.via, q].map((pt) => `${pt.x},${pt.y}`).join(" ");
+            return (
+              <polyline
+                key={i}
+                points={pts}
+                fill="none"
+                stroke="#9a9da3"
+                strokeWidth="1.5"
+                markerEnd="url(#diagram-arrowhead)"
+              />
+            );
+          }
           return (
             <line
               key={i}

@@ -1,6 +1,7 @@
-// Temperature signal — reusable component
+// Heat Source — reusable component
 // (file: Exponential.tsx)
-// A temperature T settling from its previous value T_o to the
+// A heat source component: it generates an environmental
+// signal — a temperature T settling from its previous value T_o to the
 // set value T_s, following Newton's law of cooling:
 // T(t) = T_s + (T_o - T_s) * e^(-k t). The rate constant k is
 // Boltzmann's constant — a fixed constant of the model, so it
@@ -97,14 +98,15 @@ export function TemperatureSignal() {
   return (
     <div>
       <div className="component-header">
-        <SymbolGlyph kind="temperature" size={56} />
-        <h2 className="component-title">Temperature signal</h2>
+        <SymbolGlyph kind="heatsource" size={56} />
+        <h2 className="component-title">Heat Source</h2>
       </div>
       <p className="component-intro">
-        A temperature settling: <MathText tex="T" /> starts at its previous
-        value <MathText tex="T_o" /> and closes on the set temperature{" "}
-        <MathText tex="T_s" /> at a rate proportional to the gap that
-        remains — Newton's law of cooling. The differential equation is
+        A heat source — like the terrarium's heating pad. It generates an
+        environmental signal: a temperature <MathText tex="T" /> that starts
+        at its previous value <MathText tex="T_o" /> and closes on the set
+        temperature <MathText tex="T_s" /> at a rate proportional to the gap
+        that remains — Newton's law of cooling. The differential equation is
         first-order linear; its solution is exponential.
       </p>
       <div className="component-controls">

@@ -21,10 +21,10 @@
     "sortOrder": 3
   },
   {
-    "definition": "What it represents is a temperature signal: a temperature T settling from its previous value T_o toward the set value T_s, closing at a rate proportional to the gap that remains. The differential equation is Newton's law of cooling, dT/dt = −k(T − T_s) — first-order linear, solved by separation of variables — and its solution is T(t) = T_s + (T_o − T_s)·e^(−kt), where k is Boltzmann's constant, a fixed constant of the model. Function type of the solution: exponential. Whether it climbs or falls is set by the sign of T_s − T_o: heating and cooling are the same signal, closing the gap from opposite sides.",
+    "definition": "What it represents is a component: a heat source, like the terrarium's heating pad. It generates an environmental signal — a temperature signal, or a heat signal, depending on which quantity we track. The signal is not drawn as a block in a diagram; it is what is measured on the lines leaving the component. Its temperature T settles from its previous value T_o toward the set value T_s that drives it, closing at a rate proportional to the gap that remains. The differential equation is Newton's law of cooling, dT/dt = −k(T − T_s) — first-order linear, solved by separation of variables — and its solution is T(t) = T_s + (T_o − T_s)·e^(−kt), where k is Boltzmann's constant, a fixed constant of the model. Function type of the solution: exponential. Whether it climbs or falls is set by the sign of T_s − T_o: heating and cooling are the same signal, closing the gap from opposite sides.",
     "group": "environmental",
-    "kind": "temperature",
-    "name": "Temperature signal",
+    "kind": "heatsource",
+    "name": "Heat Source",
     "sortOrder": 6
   },
   {
@@ -36,13 +36,13 @@
   },
   {
     "kind": "thermostat",
-    "name": "Thermostat signal",
-    "definition": "What it represents is the thermostat setting: the set temperature T_s, dialled in and held — a control signal, the value the temperature signal is told to settle to. It does not change with time: while it is set, it is constant, and everything else in the system chases it. Turn the dial and T_s takes a new value; between turns, it is a constant signal. Function type: constant. It is drawn with a gear around the outside and a dial inside, so control signals can be told apart at a glance.",
+    "name": "Thermostat",
+    "definition": "What it represents is a component: the thermostat. It generates a control signal — the set temperature T_s, dialled in and held constant. The signal is not drawn as a block in a diagram; it is what is measured on the line leaving the thermostat, and everything else in the system chases it. Turn the dial and T_s takes a new value; between turns, it is constant. Function type: constant. It is drawn with a gear around the outside and a dial inside, so control components can be told apart at a glance.",
     "group": "control",
     "sortOrder": 10
   },
   {
-    "definition": "What it represents is temperature falling off with distance: a temperature that is constant in time at every point, but whose value falls exponentially as position x grows — the attenuation of heat as it travels through a medium. Its value at position x is set by three numbers: the temperature at x = 0, the end temperature it falls toward as x grows, and the cutoff rate, which sets how fast the fall happens — a large cutoff rate spends the heat quickly, a small one lets it reach far. The equation along x, dT/dx = −c(T − T_end), is first-order linear, and its solution is an exponential in position rather than in time, so nothing in it ever changes with time.",
+    "definition": "What it represents is a component: a filter. It generates a transform — temperature falling off with distance: a temperature that is constant in time at every point, but whose value falls exponentially as position x grows — the attenuation of heat as it travels through a medium. Its value at position x is set by three numbers: the temperature at x = 0, the end temperature it falls toward as x grows, and the cutoff rate, which sets how fast the fall happens — a large cutoff rate spends the heat quickly, a small one lets it reach far. The equation along x, dT/dx = −c(T − T_end), is first-order linear, and its solution is an exponential in position rather than in time, so nothing in it ever changes with time.",
     "group": "transform",
     "kind": "transform",
     "name": "Thermodynamic filter",

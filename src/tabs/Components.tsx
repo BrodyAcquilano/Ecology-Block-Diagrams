@@ -16,12 +16,12 @@ import { SymbolGlyph } from "../components/SymbolGlyph";
 const GROUPS: { title: string; items: { name: string; kind: string }[] }[] = [
   {
     title: "Control signals",
-    items: [{ name: "Thermostat signal", kind: "thermostat" }],
+    items: [{ name: "Thermostat", kind: "thermostat" }],
   },
   {
     title: "Environmental signals",
     items: [
-      { name: "Temperature signal", kind: "temperature" },
+      { name: "Heat Source", kind: "heatsource" },
     ],
   },
   {
@@ -32,7 +32,7 @@ const GROUPS: { title: string; items: { name: string; kind: string }[] }[] = [
 ];
 
 export function Components() {
-  const [active, setActive] = useState("Temperature signal");
+  const [active, setActive] = useState("Heat Source");
   return (
     <div className="components-layout">
       <div className="components-list">
@@ -54,8 +54,8 @@ export function Components() {
         ))}
       </div>
       <div className="components-body">
-        {active === "Temperature signal" && <TemperatureSignal />}
-        {active === "Thermostat signal" && <Thermostat />}
+        {active === "Heat Source" && <TemperatureSignal />}
+        {active === "Thermostat" && <Thermostat />}
         {active === "Thermodynamic filter" && <ExponentialTransform />}
       </div>
     </div>

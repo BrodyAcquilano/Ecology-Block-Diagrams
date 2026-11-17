@@ -1,4 +1,4 @@
-# Temperature signal — derivation of the solution
+# Heat Source — derivation of the solution
 
 Differential equation type: first-order linear (Newton's law of cooling), solved by separation of variables.
 
