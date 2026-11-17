@@ -1,0 +1,30 @@
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background: #fafafa; color: #1a1a1a; }
+
+/* Tab bar */
+.tabs { display: flex; gap: 4px; padding: 8px 12px 0; border-bottom: 1px solid #d8d8d8; background: #fff; overflow-x: auto; }
+.tabs button { border: 1px solid #d8d8d8; border-bottom: none; background: #f0f0f0; padding: 6px 14px; border-radius: 6px 6px 0 0; cursor: pointer; font: inherit; white-space: nowrap; }
+.tabs button.active { background: #fff; font-weight: 600; }
+.tab-body { padding: 16px; }
+
+/* Code Editor tab */
+.editor-layout { display: flex; border: 1px solid #d8d8d8; background: #fff; min-height: 480px; }
+.tree { width: 260px; flex: 0 0 260px; border-right: 1px solid #e2e2e2; padding: 10px; overflow: auto; }
+.tree .node { padding: 3px 6px; border-radius: 4px; cursor: pointer; white-space: nowrap; }
+.tree .node.folder { font-weight: 600; cursor: default; }
+.tree .node.selected { background: #e8eef7; }
+.editor-pane { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.editor-toolbar { display: flex; gap: 6px; padding: 8px; border-bottom: 1px solid #e2e2e2; }
+.editor-toolbar button { border: 1px solid #c9c9c9; background: #f5f5f5; border-radius: 5px; padding: 4px 10px; cursor: pointer; font: inherit; }
+.editor-main { flex: 1; display: flex; overflow: hidden; }
+.line-numbers { padding: 10px 8px; text-align: right; color: #999; background: #fbfbfb; border-right: 1px solid #eee; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 13px; line-height: 1.5; user-select: none; }
+.editor-main textarea { flex: 1; border: none; outline: none; resize: none; padding: 10px 12px; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 13px; line-height: 1.5; }
+.check-line { padding: 6px 10px; font-size: 13px; color: #8a6d00; background: #fff8e1; border-top: 1px solid #eee; }
+
+/* Symbols tab */
+.symbol-list { display: flex; flex-direction: column; gap: 10px; }
+.symbol-row { display: flex; gap: 14px; align-items: flex-start; background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 12px 14px; }
+.symbol-glyph { flex: 0 0 64px; width: 64px; height: 64px; border: 2px solid #444; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.symbol-name { font-weight: 600; margin-bottom: 4px; }
+.symbol-def { white-space: pre-wrap; line-height: 1.45; }
