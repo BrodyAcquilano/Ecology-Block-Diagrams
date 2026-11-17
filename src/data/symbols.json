@@ -15,7 +15,7 @@
   },
   {
     "definition": "What it represents is the spread of values across all the parts of a system at one instant — few near zero, most in the middle, a long tail of a few very large — and the single average value that spread amounts to. It stands for two steps: simplification 3, the whole set of parts and their individual values replaced by this one distribution, and simplification 4, that distribution collapsed by its integral average, ⟨E⟩ = ∫ E · P(E) dE, into the single number the rest of the chain works with. It is made before the diagram even starts and carried through the whole chain — every value anywhere in the diagrams is already this average, not any one part's value.",
-    "group": "signal",
+    "group": "environmental",
     "kind": "boltzmann",
     "name": "Boltzmann distribution",
     "sortOrder": 3
@@ -28,15 +28,8 @@
     "sortOrder": 4
   },
   {
-    "definition": "What it represents is the envelope of an oscillator signal being taken as the signal. An oscillator swings around its mean inside a decaying envelope; this converter — a type of signal converter — keeps that envelope and the mean it bounds, and drops the swing between them, so an exponential comes out where an oscillator went in. It changes the kind of signal, not its destination or its size: the exponential it produces settles to the same target, along the same mean, as the oscillator it replaces. This is simplification 6 as a step in the diagram — a conversion we perform on the signal so the rest of the chain can work with the simple form, not a process happening in the system.",
-    "group": "operator",
-    "kind": "envelope",
-    "name": "Envelope signal converter — the envelope operator",
-    "sortOrder": 5
-  },
-  {
     "definition": "What it represents is a temperature signal: a temperature T settling from its previous value T_o toward the set value T_s, closing at a rate proportional to the gap that remains. The differential equation is Newton's law of cooling, dT/dt = −k(T − T_s) — first-order linear, solved by separation of variables — and its solution is T(t) = T_s + (T_o − T_s)·e^(−kt), where k is Boltzmann's constant, a fixed constant of the model. Function type of the solution: exponential. Whether it climbs or falls is set by the sign of T_s − T_o: heating and cooling are the same signal, closing the gap from opposite sides.",
-    "group": "signal",
+    "group": "environmental",
     "kind": "heat",
     "name": "Heat Signal",
     "sortOrder": 6
@@ -47,20 +40,6 @@
     "kind": "mixer",
     "name": "Mixer — ⊗",
     "sortOrder": 7
-  },
-  {
-    "definition": "What it represents is a transform converter. A transform converter is a block in a system diagram that takes a transform in one form and puts it out in another form: it changes the form of the transform — the form of the response — not the kind of signal — the underlying transform, what it does to the signal, stays exactly the same; only the form it is carried in changes. That is what separates it from the envelope signal converter (the envelope operator): an envelope signal converter changes the kind of signal (oscillator in, exponential signal out), while a transform converter changes the form a response is expressed in. A transform converter has no letter notation — it is named for the conversion it performs. This converter works on a transform that varies smoothly: in goes the transform as it actually is, a smooth curve, and out comes the same transform converted into a piecewise linear approximation — straight-line pieces standing in for the smooth curve. The transform itself is unchanged — the same effect, at the same points — only the form it is carried in changes. This symbol is not used in the main block diagram yet, but it is kept here because it can be used later.",
-    "group": "operator",
-    "kind": "piecewise",
-    "name": "Piecewise linear approximation",
-    "sortOrder": 8
-  },
-  {
-    "definition": "What it represents is keeping only the settled part of a signal and discarding its transient: a filter in time, not in space. It stands for the judgement that the variable has been held constant long enough — t ≥ t_s, where t_s is the time the settling takes — that the travel from the old value to the new one can be ignored and only the arrived value kept. It is a filter because it passes part of what reaches it and holds back the rest: the steady state passes, the transient does not. This is simplification 8 as a step in the diagram, and it applies only when that condition actually holds — change the setting and the transient is real again until it settles.",
-    "group": "operator",
-    "kind": "filter",
-    "name": "Steady-state filter",
-    "sortOrder": 9
   },
   {
     "kind": "thermostat",

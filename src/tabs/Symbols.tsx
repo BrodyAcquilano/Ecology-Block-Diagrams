@@ -5,7 +5,8 @@
 // square for transforms, a gear for control signals.
 // Inside lines: white for operators, heat-orange for signals,
 // red for transforms and thermodynamic signals.
-// Sorted into Operators, Signals, Control signals and Transforms.
+// Order: Control signals first (they are the inputs), then
+// Environmental signals, then Transforms, Operators last.
 import symbols from "../data/symbols.json";
 import { SymbolGlyph } from "../components/SymbolGlyph";
 
@@ -18,10 +19,10 @@ type Sym = {
 };
 
 const GROUPS: { key: string; title: string }[] = [
-  { key: "operator", title: "Operators" },
-  { key: "signal", title: "Signals" },
   { key: "control", title: "Control signals" },
+  { key: "environmental", title: "Environmental signals" },
   { key: "transform", title: "Transforms" },
+  { key: "operator", title: "Operators" },
 ];
 
 export function Symbols() {

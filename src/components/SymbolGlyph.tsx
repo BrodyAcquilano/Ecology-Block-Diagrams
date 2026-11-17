@@ -34,30 +34,12 @@ export const GLYPHS: Record<string, ReactNode> = {
       <line x1="13.6" y1="37.6" x2="37.6" y2="13.6" />
     </>
   ),
-  // Envelope converter — a dashed diamond with its sides caved in,
-  // inside a circle like every other symbol
-  envelope: (
-    <path
-      d="M32 10 Q 39 25, 54 32 Q 39 39, 32 54 Q 25 39, 10 32 Q 25 25, 32 10 Z"
-      strokeDasharray="4 3"
-    />
-  ),
   mixer: (
     <>
       <line x1="23" y1="23" x2="41" y2="41" />
       <line x1="41" y1="23" x2="23" y2="41" />
     </>
   ),
-  // Piecewise — line at 2/3 height from the left to the middle,
-  // a gap where it drops to 1/3 height, then a line to the right
-  piecewise: (
-    <>
-      <line x1="9" y1="22" x2="32" y2="22" />
-      <line x1="32" y1="42" x2="55" y2="42" />
-    </>
-  ),
-  // Steady-state filter — hourglass, drawn big in its circle
-  filter: <path d="M19 14 L45 14 L34.5 32 L45 50 L19 50 L29.5 32 Z" />,
   // Signals — Boltzmann: a distribution curve, not letters
   boltzmann: (
     <path d="M10 48 C 16 47, 20 20, 27 16 C 34 12, 37 26, 42 38 C 46 46, 50 48, 54 48" />
@@ -97,10 +79,7 @@ export const GLYPH_INK: Record<string, string> = {
   difference: INK,
   addition: INK,
   medium: INK,
-  envelope: INK,
   mixer: INK,
-  piecewise: INK,
-  filter: INK,
   boltzmann: SIGNAL_INK,
   heat: TRANSFORM_INK,
   thermostat: TRANSFORM_INK,
