@@ -55,7 +55,7 @@ $$
 C_1 = T_o - T_s
 $$
 
-That is why there is no $T_o$ line in the diagram: $T_o$ is not an input either — it never travels on a line; it only sets the constant. The signal is written with $C_1$, not with the live $T(t)$: the decay is the heat source's own time course, applied once — applied to the live gap, it would decay a gap that is already closing, and decay it twice. At the start, the live gap and the starting gap are the same number, because $T(0) = T_o$. That is where the two writings meet — at the start, the live gap is the starting gap:
+That is why there is no $T_o$ line in the diagram: $T_o$ is not an input either — it never travels on a line; it only sets the constant. The signal is written with $C_1$, not with the live $T(t)$: the decay is the heat source's own time course, applied once — applied to the live gap, it would decay a gap that is already closing, and decay it twice. At the start, the live gap and the starting gap are the same number, because $T(0) = T_o$. That is where the two writings meet — when $t = 0$, the live gap is the starting gap:
 
 $$
 T(t) - T_s = T_o - T_s
