@@ -11,7 +11,7 @@
 import { useState } from "react";
 import { TemperatureSignal } from "../components/TemperatureSignal";
 import { Thermostat } from "../components/Thermostat";
-import { ExponentialTransform } from "../components/ThermodynamicFilter";
+import { ThermodynamicFilter } from "../components/ThermodynamicFilter";
 import { SymbolGlyph } from "../components/SymbolGlyph";
 
 const GROUPS: { title: string; items: { name: string; kind: string }[] }[] = [
@@ -56,7 +56,7 @@ export function Components() {
       <div className="components-body">
         {active === "Heat Source" && <TemperatureSignal />}
         {active === "Thermostat" && <Thermostat />}
-        {active === "Thermodynamic filter" && <ExponentialTransform />}
+        {active === "Thermodynamic filter" && <ThermodynamicFilter />}
       </div>
     </div>
   );

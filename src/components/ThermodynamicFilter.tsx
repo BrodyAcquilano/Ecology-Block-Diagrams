@@ -13,7 +13,7 @@ import { useEffect, useRef, useState } from "react";
 import { SymbolGlyph } from "./SymbolGlyph";
 import { MathText } from "./MathText";
 
-export function ExponentialTransform() {
+export function ThermodynamicFilter() {
   const [initial, setInitial] = useState(100);
   const [end, setEnd] = useState(10);
   const [cutoff, setCutoff] = useState(0.45);
