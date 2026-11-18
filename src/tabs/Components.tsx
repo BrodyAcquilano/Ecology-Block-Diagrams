@@ -9,7 +9,7 @@
 // Each entry in the list shows the component's symbol beside
 // its name.
 import { useState } from "react";
-import { TemperatureSignal } from "../components/Exponential";
+import { TemperatureSignal } from "../components/TemperatureSignal";
 import { Thermostat } from "../components/Thermostat";
 import { ExponentialTransform } from "../components/ExponentialTransform";
 import { SymbolGlyph } from "../components/SymbolGlyph";
