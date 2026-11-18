@@ -63,6 +63,14 @@ $$
 T(t) = T_s + C_1 e^{-kt}
 $$
 
+The whole loop is already in that one equation. Move the setting to the left:
+
+$$
+T(t) - T_s = C_1 e^{-kt}
+$$
+
+The left side is the heat source's input — the live gap the difference operator measures. The right side is its output — the heat signal. The equation says the two are equal: input equals output, one quantity written two ways. And adding the setting back, at the addition operator, gives T(t) again, the air temperature — which is fed back to the beginning, to update the next state.
+
 T(t) is fed back to the difference operator, and it also proceeds to the mixer. The thermodynamic filter's signal is mixed in there — the attenuation over space:
 
 $$
