@@ -1,10 +1,11 @@
 // Components tab
 // A list of reusable components, grouped the same way as the
 // symbols: Controls first (the inputs), then
-// Environmental signal generators, Transforms, and Operators last.
-// Operators is empty for now.
-// Circle for normal signals, gear for control signals,
-// square for transforms.
+// Environmental signal generators, then Transforms.
+// Operators are not components, so they are not listed here —
+// they live in the Symbols tab.
+// Gear for controls, diamond for environmental signal
+// generators, square for transforms.
 // Each entry in the list shows the component's symbol beside
 // its name.
 import { useState } from "react";
@@ -28,7 +29,6 @@ const GROUPS: { title: string; items: { name: string; kind: string }[] }[] = [
     title: "Transforms",
     items: [{ name: "Thermodynamic filter", kind: "transform" }],
   },
-  { title: "Operators", items: [] },
 ];
 
 export function Components() {
