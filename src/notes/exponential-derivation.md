@@ -21,7 +21,7 @@ $$
 \frac{dT}{dt} = -k \left( T - T_s \right)
 $$
 
-The constant k is Boltzmann's constant: a fixed constant of the model, not a setting, so it has no slider.
+The constant k is a rate constant. It is not a universal constant: it depends on the two mediums — the heat source and the medium it is heating — and on how fast heat is exchanged between them, which is tied to their heat capacities. A different pair of mediums gives a different k, so k is set with a slider.
 
 ## 2. Separating the variables
 

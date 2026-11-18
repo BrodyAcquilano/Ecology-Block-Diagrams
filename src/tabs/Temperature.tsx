@@ -72,7 +72,7 @@ const LABELS: DiagramLabel[] = [
   { x: 185, y: 90, tex: "T_s" },
   { x: 365, y: 30, tex: "T_s" },
   { x: 375, y: 90, tex: "T_s - T(t)" },
-  { x: 555, y: 120, tex: "(T_s - T(t))e^{-kt}" },
+  { x: 555, y: 120, tex: "(T_o - T_s)e^{-kt}" },
   { x: 725, y: 90, tex: "T(t)" },
   { x: 460, y: 185, tex: "T(t)" },
   { x: 884, y: 90, tex: "T(t, x)" },

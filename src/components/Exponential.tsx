@@ -5,10 +5,11 @@
 // temperature of the air is the setting plus that signal,
 // T(t) = T_s + (T_o - T_s) * e^(-k t), following Newton's law
 // of cooling; T(t) is the air temperature, not the signal.
-// The rate constant k is Boltzmann's constant — a fixed
-// constant of the model, so it has no slider. Sliders set
-// T_o and T_s; the graph follows the solution live, transient
-// first, then steady state.
+// The rate constant k is a generic rate constant: it depends
+// on the heat source and the medium it is heating — how fast
+// heat is exchanged between them — so it has its own slider,
+// alongside T_o and T_s. The graph follows the solution live,
+// transient first, then steady state.
 // Variable labels are set in LaTeX (MathText) — before the
 // graph and on the graph itself, as overlays on the canvas.
 // The derivation of the solution is in the note below the graph.
@@ -18,13 +19,10 @@ import { SymbolGlyph } from "./SymbolGlyph";
 import { MathText } from "./MathText";
 import note from "../notes/exponential-derivation.md?raw";
 
-// Boltzmann's constant — the model's fixed rate constant.
-// In the graph's normalised time units it sets the settling rate.
-const K = 0.7;
-
 export function TemperatureSignal() {
   const [To, setTo] = useState(80);
   const [Ts, setTs] = useState(25);
+  const [k, setK] = useState(0.7);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // The graph's vertical scale, shared by the canvas drawing and
@@ -79,14 +77,14 @@ export function TemperatureSignal() {
       const steps = Math.max(2, Math.floor(tNow * 30));
       for (let i = 0; i <= steps; i++) {
         const t = i / 30;
-        const a = Ts + (To - Ts) * Math.exp(-K * t);
+        const a = Ts + (To - Ts) * Math.exp(-k * t);
         if (i === 0) ctx.moveTo(x(t), y(a));
         else ctx.lineTo(x(t), y(a));
       }
       ctx.stroke();
       ctx.lineWidth = 1;
       // Moving point on the curve
-      const aNow = Ts + (To - Ts) * Math.exp(-K * tNow);
+      const aNow = Ts + (To - Ts) * Math.exp(-k * tNow);
       ctx.fillStyle = "#e5484d";
       ctx.beginPath();
       ctx.arc(x(tNow), y(aNow), 4, 0, Math.PI * 2);
@@ -95,7 +93,7 @@ export function TemperatureSignal() {
     };
     raf = requestAnimationFrame(draw);
     return () => cancelAnimationFrame(raf);
-  }, [To, Ts, yMin, yMax]);
+  }, [To, Ts, k, yMin, yMax]);
 
   return (
     <div>
@@ -141,8 +139,22 @@ export function TemperatureSignal() {
             onChange={(e) => setTs(Number(e.target.value))}
           />
         </label>
+        <label>
+          <span>
+            Rate constant <MathText tex="k" />: {k.toFixed(2)}
+          </span>
+          <input
+            type="range"
+            min={0.1}
+            max={2}
+            step={0.05}
+            value={k}
+            onChange={(e) => setK(Number(e.target.value))}
+          />
+        </label>
         <p className="empty-note">
-          Rate constant <MathText tex="k" />: Boltzmann's constant — fixed, no slider.
+          <MathText tex="k" /> depends on the heat source and the medium it is
+          heating — how fast heat is exchanged between them.
         </p>
       </div>
       <div className="component-graph-wrap">
