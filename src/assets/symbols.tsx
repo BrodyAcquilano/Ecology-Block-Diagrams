@@ -16,10 +16,6 @@ export function MixerSymbol({ size = 64 }: { size?: number }) {
   return <SymbolGlyph kind="mixer" size={size} />;
 }
 
-export function BoltzmannSymbol({ size = 64 }: { size?: number }) {
-  return <SymbolGlyph kind="boltzmann" size={size} />;
-}
-
 export function HeatSourceSymbol({ size = 64 }: { size?: number }) {
   return <SymbolGlyph kind="heatsource" size={size} />;
 }
@@ -36,7 +32,6 @@ export const SYMBOL_COMPONENTS: Record<string, ComponentType<{ size?: number }>>
   difference: DifferenceSymbol,
   addition: AdditionSymbol,
   mixer: MixerSymbol,
-  boltzmann: BoltzmannSymbol,
   heatsource: HeatSourceSymbol,
   thermostat: ThermostatSymbol,
   transform: ThermodynamicFilterSymbol,

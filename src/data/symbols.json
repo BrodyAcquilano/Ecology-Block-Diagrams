@@ -14,13 +14,6 @@
     "sortOrder": 1
   },
   {
-    "definition": "What it represents is the spread of values across all the parts of a system at one instant — few near zero, most in the middle, a long tail of a few very large — and the single average value that spread amounts to. It stands for two steps: simplification 3, the whole set of parts and their individual values replaced by this one distribution, and simplification 4, that distribution collapsed by its integral average, ⟨E⟩ = ∫ E · P(E) dE, into the single number the rest of the chain works with. It is made before the diagram even starts and carried through the whole chain — every value anywhere in the diagrams is already this average, not any one part's value.",
-    "group": "environmental",
-    "kind": "boltzmann",
-    "name": "Boltzmann distribution",
-    "sortOrder": 3
-  },
-  {
     "definition": "What it represents is a component: a heat source, like the terrarium's heating pad. It generates an environmental signal — a temperature signal, or a heat signal, depending on which quantity we track. The signal is not drawn as a block in a diagram; it is what is measured on the lines leaving the component. Its temperature T settles from its previous value T_o toward the set value T_s that drives it, closing at a rate proportional to the gap that remains. The differential equation is Newton's law of cooling, dT/dt = −k(T − T_s) — first-order linear, solved by separation of variables — and its solution is T(t) = T_s + (T_o − T_s)·e^(−kt), where k is Boltzmann's constant, a fixed constant of the model. Function type of the solution: exponential. Whether it climbs or falls is set by the sign of T_s − T_o: heating and cooling are the same signal, closing the gap from opposite sides.",
     "group": "environmental",
     "kind": "heatsource",

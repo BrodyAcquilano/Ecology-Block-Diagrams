@@ -2,8 +2,8 @@
 // outline that says what kind of thing it is:
 // a white circle for normal signals and operators,
 // a white square for transforms, a gear for control signals.
-// Inside lines are white for operators, heat-orange for
-// signals, red for transforms and thermodynamic signals.
+// Inside lines are white for operators, red for transforms
+// and thermodynamic signals.
 import type { ReactNode } from "react";
 
 export const INK = "#e8e8e8";
@@ -28,10 +28,6 @@ export const GLYPHS: Record<string, ReactNode> = {
       <line x1="23" y1="23" x2="41" y2="41" />
       <line x1="41" y1="23" x2="23" y2="41" />
     </>
-  ),
-  // Signals — Boltzmann: a distribution curve, not letters
-  boltzmann: (
-    <path d="M10 48 C 16 47, 20 20, 27 16 C 34 12, 37 26, 42 38 C 46 46, 50 48, 54 48" />
   ),
   // Heat Source — a flame: the heat source component's symbol
   heatsource: (
@@ -68,7 +64,6 @@ export const GLYPH_INK: Record<string, string> = {
   difference: INK,
   addition: INK,
   mixer: INK,
-  boltzmann: SIGNAL_INK,
   heatsource: TRANSFORM_INK,
   thermostat: TRANSFORM_INK,
   transform: TRANSFORM_INK,

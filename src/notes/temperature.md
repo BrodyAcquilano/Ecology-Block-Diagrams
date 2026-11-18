@@ -13,13 +13,15 @@ The thermostat is a control, the heat source is an environmental signal generato
 
 ## 2. The block diagram
 
-The thermostat and the heat source are both connected to the difference operator. The thermostat generates the set temperature:
+The thermostat generates the set temperature:
 
 $$
 T_s
 $$
 
-The heat source's own temperature, T(t), is fed back to the difference operator along the loop below the chain. At the start it is:
+The setting splits two ways. One branch goes into the difference operator. The other runs along a parallel branch, over the top, to the addition operator further along the chain.
+
+The output of the addition operator, T(t), is fed back to the difference operator along the loop below the chain. At the start it is:
 
 $$
 T(0) = T_o
@@ -31,19 +33,25 @@ $$
 T_s - T(t)
 $$
 
-The setting also runs straight to the heat source, bypassing the difference operator — the solution takes both T_s and the gap as inputs. The gap is what drives the heat source. Its temperature follows Newton's law of cooling:
+That gap is the heat source's input — the intermediate signal. The heat source applies the exponential decay from Newton's law of cooling:
 
 $$
 \frac{dT}{dt} = -k \left( T - T_s \right)
 $$
 
-whose solution is the signal the heat source generates:
+so what leaves the heat source is the decayed gap:
 
 $$
-T(t) = T_s + \left( T_o - T_s \right) e^{-kt}
+\left( T_s - T(t) \right) e^{-kt}
 $$
 
-On its way out, that signal, T(t), reaches the mixer. The thermodynamic filter's signal is mixed in there too — the attenuation over space:
+The addition operator adds the parallel branch of the setting to it, and that sum is T(t):
+
+$$
+T(t) = T_s + \left( T_s - T(t) \right) e^{-kt}
+$$
+
+T(t) is fed back to the difference operator, and it also proceeds to the mixer. The thermodynamic filter's signal is mixed in there — the attenuation over space:
 
 $$
 \alpha(x) = e^{-cx}

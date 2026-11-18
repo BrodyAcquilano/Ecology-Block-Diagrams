@@ -3,7 +3,7 @@
 // The outline of the picture says what kind of thing it is:
 // a white circle for normal signals and operators, a white
 // square for transforms, a gear for controls.
-// Inside lines: white for operators, heat-orange for signals,
+// Inside lines: white for operators,
 // red for transforms and thermodynamic signals.
 // Order: Controls first (they are the inputs), then
 // Environmental signal generators, then Transforms, Operators last.

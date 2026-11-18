@@ -19,60 +19,70 @@ import note from "../notes/temperature.md?raw";
 
 // The diagram, placed by x/y in the BlockDiagram. The blocks
 // are components; the signals are what is measured on the
-// lines between them. The thermostat and the heat source's
-// feedback both reach the difference operator; the gap drives
-// the heat source; its signal is mixed with the thermodynamic
-// filter's attenuation at the mixer; the output is just a
-// line, carrying the temperature signal at that point.
+// lines between them. The thermostat's setting splits: one
+// branch into the difference operator, and a parallel branch
+// over the top to the addition operator. The difference
+// operator measures the gap between the setting and the
+// feedback, T(t); the gap is the heat source's input, and
+// what leaves the heat source is the gap decayed — the
+// intermediate signal. The addition operator adds the
+// parallel branch of the setting to it, and that sum is
+// T(t): fed back to the difference operator, and on to the
+// mixer, where the thermodynamic filter's attenuation is
+// mixed in. The output is just a line.
 const NODES: DiagramNode[] = [
   { id: "tstat", symbol: "thermostat", x: 90, y: 90 },
-  { id: "diff", symbol: "difference", x: 290, y: 90 },
-  { id: "heat", symbol: "heatsource", x: 490, y: 90 },
-  { id: "mix", symbol: "mixer", x: 670, y: 90 },
-  { id: "filt", symbol: "transform", x: 670, y: 215 },
+  { id: "diff", symbol: "difference", x: 280, y: 90 },
+  { id: "heat", symbol: "heatsource", x: 470, y: 90 },
+  { id: "add", symbol: "addition", x: 640, y: 90 },
+  { id: "mix", symbol: "mixer", x: 810, y: 90 },
+  { id: "filt", symbol: "transform", x: 810, y: 225 },
 ];
 
 const LINKS: DiagramLink[] = [
   { from: "tstat", to: "diff", fromAnchor: "right", toAnchor: "left" },
   {
     from: "tstat",
-    to: "heat",
+    to: "add",
     fromAnchor: "top",
     toAnchor: "top",
     via: [
-      { x: 90, y: 32 },
-      { x: 490, y: 32 },
+      { x: 90, y: 30 },
+      { x: 640, y: 30 },
     ],
   },
   { from: "diff", to: "heat", fromAnchor: "right", toAnchor: "left" },
+  { from: "heat", to: "add", fromAnchor: "right", toAnchor: "left" },
   {
-    from: "heat",
+    from: "add",
     to: "diff",
     fromAnchor: "bottom",
     toAnchor: "bottom",
     via: [
-      { x: 490, y: 175 },
-      { x: 290, y: 175 },
+      { x: 640, y: 185 },
+      { x: 280, y: 185 },
     ],
   },
-  { from: "heat", to: "mix", fromAnchor: "right", toAnchor: "left" },
+  { from: "add", to: "mix", fromAnchor: "right", toAnchor: "left" },
   { from: "filt", to: "mix", fromAnchor: "top", toAnchor: "bottom" },
-  { from: "mix", toPoint: { x: 838, y: 90 }, fromAnchor: "right" },
+  { from: "mix", toPoint: { x: 958, y: 90 }, fromAnchor: "right" },
 ];
 
 const LABELS: DiagramLabel[] = [
-  { x: 190, y: 90, tex: "T_s" },
-  { x: 290, y: 32, tex: "T_s" },
-  { x: 390, y: 90, tex: "T_s - T(t)" },
-  { x: 580, y: 90, tex: "T(t)" },
-  { x: 390, y: 175, tex: "T(t)" },
-  { x: 772, y: 90, tex: "T(t, x)" },
-  { x: 670, y: 152, tex: "\\alpha(x)" },
+  { x: 185, y: 90, tex: "T_s" },
+  { x: 365, y: 30, tex: "T_s" },
+  { x: 375, y: 90, tex: "T_s - T(t)" },
+  { x: 555, y: 120, tex: "(T_s - T(t))e^{-kt}" },
+  { x: 725, y: 90, tex: "T(t)" },
+  { x: 460, y: 185, tex: "T(t)" },
+  { x: 884, y: 90, tex: "T(t, x)" },
+  { x: 810, y: 157, tex: "\\alpha(x)" },
   { x: 90, y: 142, text: "Thermostat" },
-  { x: 290, y: 142, text: "Difference operator" },
-  { x: 490, y: 142, text: "Heat Source" },
-  { x: 670, y: 40, text: "Mixer" },
-  { x: 670, y: 263, text: "Thermodynamic filter" },
+  { x: 280, y: 142, text: "Difference operator" },
+  { x: 470, y: 142, text: "Heat Source" },
+  { x: 640, y: 142, text: "Addition operator" },
+  { x: 810, y: 40, text: "Mixer" },
+  { x: 810, y: 273, text: "Thermodynamic filter" },
 ];
 
 // Both graphs share the fixed 0-100 scale (with padding) used
@@ -246,7 +256,7 @@ export function Temperature() {
           </div>
         </div>
       </div>
-      <BlockDiagram width={860} height={290} nodes={NODES} links={LINKS} labels={LABELS} />
+      <BlockDiagram width={980} height={300} nodes={NODES} links={LINKS} labels={LABELS} />
       <MarkdownNote source={note} />
     </div>
   );
