@@ -1,10 +1,14 @@
 // Heat Source — reusable component
 // (file: Exponential.tsx)
 // A heat source component: it generates an environmental
-// signal — the decaying term (T_o - T_s) * e^(-k t). The
-// temperature of the air is the setting plus that signal,
-// T(t) = T_s + (T_o - T_s) * e^(-k t), following Newton's law
+// signal — the decaying term (T_s - T_o) * e^(-k t). The
+// temperature of the air is the setting minus that signal,
+// T(t) = T_s - (T_s - T_o) * e^(-k t), following Newton's law
 // of cooling; T(t) is the air temperature, not the signal.
+// The gap is written set minus previous, and it is never
+// negative: the heat source has no cooling element and
+// nothing else heats the air, so the setting is never below
+// the previous temperature — the T_s slider's minimum is T_o.
 // The rate constant k is a generic rate constant: it depends
 // on the heat source and the medium it is heating — how fast
 // heat is exchanged between them — so it has its own slider,
@@ -20,8 +24,8 @@ import { MathText } from "./MathText";
 import note from "../notes/exponential-derivation.md?raw";
 
 export function TemperatureSignal() {
-  const [To, setTo] = useState(80);
-  const [Ts, setTs] = useState(25);
+  const [To, setTo] = useState(25);
+  const [Ts, setTs] = useState(80);
   const [k, setK] = useState(0.7);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -77,14 +81,14 @@ export function TemperatureSignal() {
       const steps = Math.max(2, Math.floor(tNow * 30));
       for (let i = 0; i <= steps; i++) {
         const t = i / 30;
-        const a = Ts + (To - Ts) * Math.exp(-k * t);
+        const a = Ts - (Ts - To) * Math.exp(-k * t);
         if (i === 0) ctx.moveTo(x(t), y(a));
         else ctx.lineTo(x(t), y(a));
       }
       ctx.stroke();
       ctx.lineWidth = 1;
       // Moving point on the curve
-      const aNow = Ts + (To - Ts) * Math.exp(-k * tNow);
+      const aNow = Ts - (Ts - To) * Math.exp(-k * tNow);
       ctx.fillStyle = "#e5484d";
       ctx.beginPath();
       ctx.arc(x(tNow), y(aNow), 4, 0, Math.PI * 2);
@@ -103,14 +107,16 @@ export function TemperatureSignal() {
       </div>
       <p className="component-intro">
         A heat source — like the terrarium's heating pad. It generates an
-        environmental signal: <MathText tex="(T_o - T_s) e^{-kt}" /> — the gap
-        between the previous temperature <MathText tex="T_o" /> and the set
-        temperature <MathText tex="T_s" />, decaying exponentially. The
-        temperature of the air is the panel setting plus that signal; it is
+        environmental signal: <MathText tex="(T_s - T_o) e^{-kt}" /> — the gap
+        between the set temperature <MathText tex="T_s" /> and the previous
+        temperature <MathText tex="T_o" />, decaying exponentially. The
+        temperature of the air is the panel setting minus that signal; it is
         the air temperature, <MathText tex="T(t)" />, that settles at{" "}
         <MathText tex="T_s" /> as the signal fades away — Newton's law of
-        cooling. The differential equation is first-order linear; its solution
-        is exponential.
+        cooling. The set temperature is never below the previous temperature:
+        the pad has no cooling element and nothing else heats the air, so the
+        pad is at the air's temperature or hotter. The differential equation
+        is first-order linear; its solution is exponential.
       </p>
       <div className="component-controls">
         <label>
@@ -123,7 +129,11 @@ export function TemperatureSignal() {
             max={100}
             step={1}
             value={To}
-            onChange={(e) => setTo(Number(e.target.value))}
+            onChange={(e) => {
+              const v = Number(e.target.value);
+              setTo(v);
+              if (v > Ts) setTs(v);
+            }}
           />
         </label>
         <label>
@@ -132,7 +142,7 @@ export function TemperatureSignal() {
           </span>
           <input
             type="range"
-            min={0}
+            min={To}
             max={100}
             step={1}
             value={Ts}
@@ -162,10 +172,7 @@ export function TemperatureSignal() {
         <span className="graph-label" style={{ left: 50, top: yPx(Ts) - 22 }}>
           steady state <MathText tex={`T_s = ${Ts}`} />
         </span>
-        <span
-          className="graph-label"
-          style={{ left: 50, top: To > Ts ? yPx(To) - 22 : yPx(To) + 6 }}
-        >
+        <span className="graph-label" style={{ left: 50, top: yPx(To) + 6 }}>
           <MathText tex={`T_o = ${To}`} />
         </span>
         <span className="graph-label" style={{ left: 8, top: 8 }}>
