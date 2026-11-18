@@ -11,15 +11,7 @@
 import symbols from "../data/symbols.json";
 import { SymbolGlyph } from "../components/SymbolGlyph";
 
-type Sym = {
-  kind: string;
-  name: string;
-  definition: string;
-  group: string;
-  sortOrder: number;
-};
-
-const GROUPS: { key: string; title: string }[] = [
+const GROUPS = [
   { key: "control", title: "Controls" },
   { key: "environmental", title: "Environmental signal generators" },
   { key: "transform", title: "Transforms" },
@@ -27,7 +19,7 @@ const GROUPS: { key: string; title: string }[] = [
 ];
 
 export function Symbols() {
-  const ordered = [...(symbols as unknown as Sym[])].sort(
+  const ordered = [...symbols].sort(
     (a, b) => a.sortOrder - b.sortOrder
   );
   return (

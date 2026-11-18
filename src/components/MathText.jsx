@@ -6,7 +6,7 @@ import { useMemo } from "react";
 import katex from "katex";
 import "katex/dist/katex.min.css";
 
-export function MathText({ tex }: { tex: string }) {
+export function MathText({ tex }) {
   const html = useMemo(
     () => katex.renderToString(tex, { throwOnError: false }),
     [tex]

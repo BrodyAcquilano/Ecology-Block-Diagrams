@@ -16,19 +16,19 @@ import note from "../notes/thermostat.md?raw";
 
 export function Thermostat() {
   const [Ts, setTs] = useState(25);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef(null);
   const tsRef = useRef(Ts);
   tsRef.current = Ts;
   // The step history: one value per time step. It starts full
   // of the opening value, so the feed opens with a flat line.
-  const stepsRef = useRef<{ step: number; v: number }[]>(
+  const stepsRef = useRef(
     Array.from({ length: 31 }, (_, i) => ({ step: i - 30, v: 25 }))
   );
 
   // Fixed 0-100 scale with the same padding as the other graphs.
   const yMin = -25;
   const yMax = 125;
-  const yPx = (a: number) => 14 + (1 - (a - yMin) / (yMax - yMin)) * (280 - 14 - 28);
+  const yPx = (a) => 14 + (1 - (a - yMin) / (yMax - yMin)) * (280 - 14 - 28);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -44,10 +44,10 @@ export function Thermostat() {
     const STEP_MS = 500;
     const STEPS = 30;
     const start = performance.now();
-    const y = (a: number) =>
+    const y = (a) =>
       padT + (1 - (a - yMin) / (yMax - yMin)) * (H - padT - padB);
     let raf = 0;
-    const draw = (now: number) => {
+    const draw = (now) => {
       const nowSteps = (now - start) / STEP_MS;
       const cur = Math.floor(nowSteps);
       const steps = stepsRef.current;
@@ -62,7 +62,7 @@ export function Thermostat() {
       }
       while (steps.length && steps[0].step < cur - STEPS - 1) steps.shift();
       // The window runs from t - 30 steps (left) to t (right).
-      const x = (s: number) =>
+      const x = (s) =>
         padL + ((s - (nowSteps - STEPS)) / STEPS) * (W - padL - padR);
       ctx.clearRect(0, 0, W, H);
       // Axes (labels are LaTeX overlays, not canvas text)

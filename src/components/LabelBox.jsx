@@ -5,17 +5,6 @@
 // is given.
 import { MathText } from "./MathText";
 
-export interface LabelBoxSpec {
-  x: number;
-  y: number;
-  text?: string;
-  tex?: string;
-  fontSize?: number;
-  color?: string;
-  borderColor?: string;
-  fill?: string;
-}
-
 export function LabelBox({
   x,
   y,
@@ -25,7 +14,7 @@ export function LabelBox({
   color = "#e8e8e8",
   borderColor = "#34373c",
   fill = "#1f2226",
-}: LabelBoxSpec) {
+}) {
   return (
     <div
       className="label-box"

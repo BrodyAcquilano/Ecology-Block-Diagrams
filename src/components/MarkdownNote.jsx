@@ -9,7 +9,7 @@ import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
 import "katex/dist/katex.min.css";
 
-export function MarkdownNote({ source }: { source: string }) {
+export function MarkdownNote({ source }) {
   return (
     <div className="note">
       <ReactMarkdown

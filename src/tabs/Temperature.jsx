@@ -7,12 +7,7 @@
 // diagram of the model, drawn with the reusable BlockDiagram
 // container, and a short note introducing it.
 import { useEffect, useRef, useState } from "react";
-import {
-  BlockDiagram,
-  type DiagramLabel,
-  type DiagramLink,
-  type DiagramNode,
-} from "../components/BlockDiagram";
+import { BlockDiagram } from "../components/BlockDiagram";
 import { MarkdownNote } from "../components/MarkdownNote";
 import { MathText } from "../components/MathText";
 import note from "../notes/temperature.md?raw";
@@ -32,7 +27,7 @@ import note from "../notes/temperature.md?raw";
 // T(t): fed back to the difference operator, and on to the
 // mixer, where the thermodynamic filter's attenuation is
 // mixed in. The output is just a line.
-const NODES: DiagramNode[] = [
+const NODES = [
   { id: "tstat", symbol: "thermostat", x: 90, y: 90 },
   { id: "diff", symbol: "difference", x: 280, y: 90 },
   { id: "heat", symbol: "heatsource", x: 470, y: 90 },
@@ -41,7 +36,7 @@ const NODES: DiagramNode[] = [
   { id: "filt", symbol: "transform", x: 810, y: 225 },
 ];
 
-const LINKS: DiagramLink[] = [
+const LINKS = [
   { from: "tstat", to: "diff", fromAnchor: "right", toAnchor: "left" },
   {
     from: "tstat",
@@ -70,7 +65,7 @@ const LINKS: DiagramLink[] = [
   { from: "mix", toPoint: { x: 958, y: 90 }, fromAnchor: "right" },
 ];
 
-const LABELS: DiagramLabel[] = [
+const LABELS = [
   { x: 185, y: 90, tex: "T_s" },
   { x: 365, y: 30, tex: "T_s" },
   { x: 375, y: 90, tex: "T(t) - T_s" },
@@ -91,13 +86,13 @@ const LABELS: DiagramLabel[] = [
 // by the other components.
 const Y_MIN = -25;
 const Y_MAX = 125;
-const yPx = (a: number) => 14 + (1 - (a - Y_MIN) / (Y_MAX - Y_MIN)) * (240 - 14 - 28);
+const yPx = (a) => 14 + (1 - (a - Y_MIN) / (Y_MAX - Y_MIN)) * (240 - 14 - 28);
 
 export function Temperature() {
   const [Ts, setTs] = useState(25);
-  const liveRef = useRef<HTMLCanvasElement>(null);
-  const filtRef = useRef<HTMLCanvasElement>(null);
-  const histRef = useRef<{ t: number; v: number }[]>([]);
+  const liveRef = useRef(null);
+  const filtRef = useRef(null);
+  const histRef = useRef([]);
   const valRef = useRef(25);
 
   // Live graph: the temperature chases the thermostat setting.
@@ -115,11 +110,11 @@ export function Temperature() {
     const padT = 14;
     const padB = 28;
     const WINDOW = 20000;
-    const y = (a: number) =>
+    const y = (a) =>
       padT + (1 - (a - Y_MIN) / (Y_MAX - Y_MIN)) * (H - padT - padB);
     let raf = 0;
     let last = performance.now();
-    const draw = (now: number) => {
+    const draw = (now) => {
       const dt = Math.min((now - last) / 1000, 0.1);
       last = now;
       valRef.current += (Ts - valRef.current) * (1 - Math.exp(-0.5 * dt));
@@ -177,9 +172,9 @@ export function Temperature() {
     const T_END = 10;
     const CUTOFF = 0.45;
     const X_MAX = 10;
-    const y = (a: number) =>
+    const y = (a) =>
       padT + (1 - (a - Y_MIN) / (Y_MAX - Y_MIN)) * (H - padT - padB);
-    const xx = (x: number) => padL + (x / X_MAX) * (W - padL - padR);
+    const xx = (x) => padL + (x / X_MAX) * (W - padL - padR);
     ctx.clearRect(0, 0, W, H);
     ctx.strokeStyle = "#3a3d42";
     ctx.beginPath();

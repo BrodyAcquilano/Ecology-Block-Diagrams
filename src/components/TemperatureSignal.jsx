@@ -1,5 +1,5 @@
 // Heat Source — reusable component
-// (file: TemperatureSignal.tsx)
+// (file: TemperatureSignal.jsx)
 // A heat source component: it generates an environmental
 // signal — the decaying term (T_o - T_s) * e^(-k t). The
 // temperature of the air is the setting plus that signal,
@@ -23,7 +23,7 @@ export function TemperatureSignal() {
   const [To, setTo] = useState(80);
   const [Ts, setTs] = useState(25);
   const [k, setK] = useState(0.7);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef(null);
 
   // The graph's vertical scale, shared by the canvas drawing and
   // the LaTeX labels overlaid on it.
@@ -32,7 +32,7 @@ export function TemperatureSignal() {
   const span = Math.max(hi - lo, 10);
   const yMin = lo - span * 0.25;
   const yMax = hi + span * 0.25;
-  const yPx = (a: number) => 14 + (1 - (a - yMin) / (yMax - yMin)) * (280 - 14 - 28);
+  const yPx = (a) => 14 + (1 - (a - yMin) / (yMax - yMin)) * (280 - 14 - 28);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -42,7 +42,7 @@ export function TemperatureSignal() {
     let raf = 0;
     const T_MAX = 10;
     const start = performance.now();
-    const draw = (now: number) => {
+    const draw = (now) => {
       const elapsed = ((now - start) / 1000) % (T_MAX + 1.5);
       const tNow = Math.min(elapsed, T_MAX);
       const W = canvas.width;
@@ -51,8 +51,8 @@ export function TemperatureSignal() {
       const padR = 12;
       const padT = 14;
       const padB = 28;
-      const x = (t: number) => padL + (t / T_MAX) * (W - padL - padR);
-      const y = (a: number) =>
+      const x = (t) => padL + (t / T_MAX) * (W - padL - padR);
+      const y = (a) =>
         padT + (1 - (a - yMin) / (yMax - yMin)) * (H - padT - padB);
       ctx.clearRect(0, 0, W, H);
       // Axes (labels are LaTeX overlays, not canvas text)

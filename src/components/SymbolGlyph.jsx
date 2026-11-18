@@ -5,7 +5,6 @@
 // a white square for transforms, a gear for controls.
 // Inside lines are white for operators, red for transforms
 // and thermodynamic signals.
-import type { ReactNode } from "react";
 
 export const INK = "#e8e8e8";
 export const SIGNAL_INK = "#ff8c3a";
@@ -15,7 +14,7 @@ export const TRANSFORM_INK = "#e5484d";
 export const GEAR_PATH =
   "M55.7 28.2 L61.6 27.3 L61.6 36.7 L55.7 35.8 L51.4 46.1 L56.3 49.6 L49.6 56.3 L46.1 51.4 L35.8 55.7 L36.7 61.6 L27.3 61.6 L28.2 55.7 L17.9 51.4 L14.4 56.3 L7.7 49.6 L12.6 46.1 L8.3 35.8 L2.4 36.7 L2.4 27.3 L8.3 28.2 L12.6 17.9 L7.7 14.4 L14.4 7.7 L17.9 12.6 L28.2 8.3 L27.3 2.4 L36.7 2.4 L35.8 8.3 L46.1 12.6 L49.6 7.7 L56.3 14.4 L51.4 17.9 Z";
 
-export const GLYPHS: Record<string, ReactNode> = {
+export const GLYPHS = {
   // Operators — a short minus in the centre
   difference: <line x1="24" y1="32" x2="40" y2="32" />,
   addition: (
@@ -60,7 +59,7 @@ export const GLYPHS: Record<string, ReactNode> = {
   ),
 };
 
-export const GLYPH_INK: Record<string, string> = {
+export const GLYPH_INK = {
   difference: INK,
   addition: INK,
   mixer: INK,
@@ -72,13 +71,13 @@ export const GLYPH_INK: Record<string, string> = {
 // The outline shape says the kind: circle for normal signals
 // and operators, diamond for environmental signal generators,
 // square for transforms, gear for controls.
-export const GLYPH_SHAPE: Record<string, "circle" | "diamond" | "square" | "gear"> = {
+export const GLYPH_SHAPE = {
   heatsource: "diamond",
   transform: "square",
   thermostat: "gear",
 };
 
-export function SymbolGlyph({ kind, size = 64 }: { kind: string; size?: number }) {
+export function SymbolGlyph({ kind, size = 64 }) {
   const shape = GLYPH_SHAPE[kind] ?? "circle";
   return (
     <svg viewBox="0 0 64 64" width={size} height={size} aria-hidden="true">

@@ -1,5 +1,5 @@
 // Thermodynamic filter — reusable component
-// (file: ThermodynamicFilter.tsx)
+// (file: ThermodynamicFilter.jsx)
 // A temperature that is constant in time and changes only in
 // position: the thermodynamic distance filter. Its value at
 // position x is T(x) = T_end + (T(0) - T_end) * e^(-cutoff * x),
@@ -17,7 +17,7 @@ export function ThermodynamicFilter() {
   const [initial, setInitial] = useState(100);
   const [end, setEnd] = useState(10);
   const [cutoff, setCutoff] = useState(0.45);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef(null);
 
   // The graph's vertical scale, shared by the canvas drawing and
   // the LaTeX labels overlaid on it.
@@ -26,7 +26,7 @@ export function ThermodynamicFilter() {
   const span = Math.max(hi - lo, 10);
   const yMin = lo - span * 0.25;
   const yMax = hi + span * 0.25;
-  const yPx = (a: number) => 14 + (1 - (a - yMin) / (yMax - yMin)) * (280 - 14 - 28);
+  const yPx = (a) => 14 + (1 - (a - yMin) / (yMax - yMin)) * (280 - 14 - 28);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -40,8 +40,8 @@ export function ThermodynamicFilter() {
     const padR = 12;
     const padT = 14;
     const padB = 28;
-    const x = (pos: number) => padL + (pos / X_MAX) * (W - padL - padR);
-    const y = (a: number) =>
+    const x = (pos) => padL + (pos / X_MAX) * (W - padL - padR);
+    const y = (a) =>
       padT + (1 - (a - yMin) / (yMax - yMin)) * (H - padT - padB);
     ctx.clearRect(0, 0, W, H);
     // Axes (labels are LaTeX overlays, not canvas text)

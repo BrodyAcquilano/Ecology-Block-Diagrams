@@ -1,7 +1,7 @@
 // Block diagram — reusable component
 // A box container for holding a block diagram. Symbols are
 // inserted as components (one per symbol, kept in
-// src/assets/symbols.tsx) and placed at specific x/y
+// src/assets/symbols.jsx) and placed at specific x/y
 // positions. Links draw lines between points on the symbols'
 // outlines: a point is one of the 4 quadrant points — top,
 // right, bottom, left — or any angle in degrees (0 = right,
@@ -9,40 +9,27 @@
 // anywhere. Label boxes (the LabelBox component) are placed
 // by their centre point, with font and colours set per box.
 import { SYMBOL_COMPONENTS } from "../assets/symbols";
-import { LabelBox, type LabelBoxSpec } from "./LabelBox";
+import { LabelBox } from "./LabelBox";
 
-export interface DiagramNode {
-  id: string;
-  symbol: string;
-  x: number;
-  y: number;
-  size?: number;
-}
+// A node is { id, symbol, x, y, size? }.
 
-// A point on a symbol's outline: a quadrant point by name,
-// or an angle in degrees (0 = right, 90 = bottom,
-// 180 = left, 270 = top).
-export type Anchor = "top" | "right" | "bottom" | "left" | number;
+// An anchor is a point on a symbol's outline: a quadrant point
+// by name ("top", "right", "bottom", "left"), or an angle in
+// degrees (0 = right, 90 = bottom, 180 = left, 270 = top).
 
-export interface DiagramLink {
-  from: string;
-  // The node the line runs to — or omit it and give toPoint
-  // instead, for a line that just runs out of the diagram
-  // (an output: the signal on it is measured at the edge).
-  to?: string;
-  toPoint?: { x: number; y: number };
-  fromAnchor?: Anchor;
-  toAnchor?: Anchor;
-  // Waypoints the line runs through, in order — for lines
-  // that have to bend, like a feedback loop.
-  via?: { x: number; y: number }[];
-}
+// A link is { from, to?, toPoint?, fromAnchor?, toAnchor?, via? }.
+// to is the node the line runs to — or omit it and give toPoint
+// ({ x, y }) instead, for a line that just runs out of the
+// diagram (an output: the signal on it is measured at the edge).
+// via is a list of { x, y } waypoints the line runs through, in
+// order — for lines that have to bend, like a feedback loop.
 
-export type DiagramLabel = LabelBoxSpec;
+// A label is a LabelBox's props: { x, y, text?, tex?, fontSize?,
+// color?, borderColor?, fill? }.
 
 const DEFAULT_SIZE = 64;
 
-function anchorPoint(node: DiagramNode, anchor: Anchor = "right") {
+function anchorPoint(node, anchor = "right") {
   const size = node.size ?? DEFAULT_SIZE;
   const r = (size * 29) / 64; // the drawn outline's radius
   const deg =
@@ -65,12 +52,6 @@ export function BlockDiagram({
   nodes,
   links,
   labels = [],
-}: {
-  width: number;
-  height: number;
-  nodes: DiagramNode[];
-  links: DiagramLink[];
-  labels?: DiagramLabel[];
 }) {
   const byId = new Map(nodes.map((n) => [n.id, n]));
   return (

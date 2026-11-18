@@ -8,13 +8,12 @@
 // generators, square for transforms.
 // Each entry in the list shows the component's symbol beside
 // its name.
-import { useState } from "react";
 import { TemperatureSignal } from "../components/TemperatureSignal";
 import { Thermostat } from "../components/Thermostat";
 import { ThermodynamicFilter } from "../components/ThermodynamicFilter";
 import { SymbolGlyph } from "../components/SymbolGlyph";
 
-const GROUPS: { title: string; items: { name: string; kind: string }[] }[] = [
+const GROUPS = [
   {
     title: "Controls",
     items: [{ name: "Thermostat", kind: "thermostat" }],
@@ -31,8 +30,9 @@ const GROUPS: { title: string; items: { name: string; kind: string }[] }[] = [
   },
 ];
 
-export function Components() {
-  const [active, setActive] = useState("Heat Source");
+// The selected component is held in App, so it is remembered
+// when switching to another tab and back.
+export function Components({ active, setActive }) {
   return (
     <div className="components-layout">
       <div className="components-list">
