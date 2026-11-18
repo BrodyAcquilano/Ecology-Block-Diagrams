@@ -21,25 +21,22 @@ import note from "../notes/temperature.md?raw";
 // are components; the signals are what is measured on the
 // lines between them. The thermostat's setting splits: one
 // branch into the difference operator, and a parallel branch
-// over the top to a second difference operator. The first
-// difference operator measures the gap between the setting
-// and the feedback, T_s - T(t) — never negative, since the
-// setting is never below the air temperature (the heat
-// source has no cooling element); the gap is the heat
-// source's input, and what leaves the heat source is the
-// starting gap decayed — the intermediate signal, labelled
-// with the constant C_1 (C_1 = T_s - T_o; a constant of the
-// reaction, not an input). The second difference operator
-// takes the signal away from the parallel branch of the
-// setting, and that gives T(t): fed back to the difference
-// operator, and on to the mixer, where the thermodynamic
-// filter's attenuation is mixed in. The output is just a
-// line.
+// over the top to the addition operator. The difference
+// operator measures the gap between the setting and the
+// feedback, T(t); the gap is the heat source's input, and
+// what leaves the heat source is the starting gap decayed —
+// the intermediate signal, labelled with the constant C_1
+// (C_1 = T_o - T_s; a constant of the reaction, not an
+// input). The addition operator adds the
+// parallel branch of the setting to it, and that sum is
+// T(t): fed back to the difference operator, and on to the
+// mixer, where the thermodynamic filter's attenuation is
+// mixed in. The output is just a line.
 const NODES: DiagramNode[] = [
   { id: "tstat", symbol: "thermostat", x: 90, y: 90 },
   { id: "diff", symbol: "difference", x: 280, y: 90 },
   { id: "heat", symbol: "heatsource", x: 470, y: 90 },
-  { id: "sub", symbol: "difference", x: 640, y: 90 },
+  { id: "add", symbol: "addition", x: 640, y: 90 },
   { id: "mix", symbol: "mixer", x: 810, y: 90 },
   { id: "filt", symbol: "transform", x: 810, y: 225 },
 ];
@@ -48,7 +45,7 @@ const LINKS: DiagramLink[] = [
   { from: "tstat", to: "diff", fromAnchor: "right", toAnchor: "left" },
   {
     from: "tstat",
-    to: "sub",
+    to: "add",
     fromAnchor: "top",
     toAnchor: "top",
     via: [
@@ -57,9 +54,9 @@ const LINKS: DiagramLink[] = [
     ],
   },
   { from: "diff", to: "heat", fromAnchor: "right", toAnchor: "left" },
-  { from: "heat", to: "sub", fromAnchor: "right", toAnchor: "left" },
+  { from: "heat", to: "add", fromAnchor: "right", toAnchor: "left" },
   {
-    from: "sub",
+    from: "add",
     to: "diff",
     fromAnchor: "bottom",
     toAnchor: "bottom",
@@ -68,7 +65,7 @@ const LINKS: DiagramLink[] = [
       { x: 280, y: 185 },
     ],
   },
-  { from: "sub", to: "mix", fromAnchor: "right", toAnchor: "left" },
+  { from: "add", to: "mix", fromAnchor: "right", toAnchor: "left" },
   { from: "filt", to: "mix", fromAnchor: "top", toAnchor: "bottom" },
   { from: "mix", toPoint: { x: 958, y: 90 }, fromAnchor: "right" },
 ];
@@ -76,7 +73,7 @@ const LINKS: DiagramLink[] = [
 const LABELS: DiagramLabel[] = [
   { x: 185, y: 90, tex: "T_s" },
   { x: 365, y: 30, tex: "T_s" },
-  { x: 375, y: 90, tex: "T_s - T(t)" },
+  { x: 375, y: 90, tex: "T(t) - T_s" },
   { x: 555, y: 120, tex: "C_1e^{-kt}" },
   { x: 725, y: 90, tex: "T(t)" },
   { x: 460, y: 185, tex: "T(t)" },
@@ -85,7 +82,7 @@ const LABELS: DiagramLabel[] = [
   { x: 90, y: 142, text: "Thermostat" },
   { x: 280, y: 142, text: "Difference operator" },
   { x: 470, y: 142, text: "Heat Source" },
-  { x: 640, y: 142, text: "Difference operator" },
+  { x: 640, y: 142, text: "Addition operator" },
   { x: 810, y: 40, text: "Mixer" },
   { x: 810, y: 273, text: "Thermodynamic filter" },
 ];
@@ -221,7 +218,7 @@ export function Temperature() {
           </span>
           <input
             type="range"
-            min={25}
+            min={0}
             max={100}
             step={1}
             value={Ts}
