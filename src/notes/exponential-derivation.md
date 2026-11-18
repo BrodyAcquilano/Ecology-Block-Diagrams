@@ -11,6 +11,7 @@ Contents:
 3. [Integrating](#3-integrating)
 4. [The starting condition](#4-the-starting-condition)
 5. [The steady state](#5-the-steady-state)
+6. [The heat source's signal](#6-the-heat-sources-signal)
 
 ## 1. The general form
 
@@ -65,3 +66,25 @@ As t grows the exponential dies away and only the set temperature remains:
 $$
 \lim_{t \to \infty} T(t) = T_s
 $$
+
+## 6. The heat source's signal
+
+The solution T(t) is the temperature of the air — it is not the heat source's output signal. The heat source's own signal is only the decaying part of the solution:
+
+$$
+\left( T_o - T_s \right) e^{-kt}
+$$
+
+The temperature of the air is the setting of the heating panel plus that signal:
+
+$$
+T(t) = T_s + \left( T_o - T_s \right) e^{-kt}
+$$
+
+The signal is the heat being pumped out. It starts at the full gap and weakens exponentially as the temperature of the air gets closer to the setting; when the air reaches T_s, the signal has faded away to nothing:
+
+$$
+\lim_{t \to \infty} \left( T_o - T_s \right) e^{-kt} = 0
+$$
+
+So the heat source's signal is the attenuation of the temperature over time — the same role the thermodynamic filter's attenuation plays over distance, but over time instead.

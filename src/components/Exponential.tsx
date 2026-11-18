@@ -1,12 +1,14 @@
 // Heat Source — reusable component
 // (file: Exponential.tsx)
 // A heat source component: it generates an environmental
-// signal — a temperature T settling from its previous value T_o to the
-// set value T_s, following Newton's law of cooling:
-// T(t) = T_s + (T_o - T_s) * e^(-k t). The rate constant k is
-// Boltzmann's constant — a fixed constant of the model, so it
-// has no slider. Sliders set T_o and T_s; the graph follows the
-// solution live, transient first, then steady state.
+// signal — the decaying term (T_o - T_s) * e^(-k t). The
+// temperature of the air is the setting plus that signal,
+// T(t) = T_s + (T_o - T_s) * e^(-k t), following Newton's law
+// of cooling; T(t) is the air temperature, not the signal.
+// The rate constant k is Boltzmann's constant — a fixed
+// constant of the model, so it has no slider. Sliders set
+// T_o and T_s; the graph follows the solution live, transient
+// first, then steady state.
 // Variable labels are set in LaTeX (MathText) — before the
 // graph and on the graph itself, as overlays on the canvas.
 // The derivation of the solution is in the note below the graph.
@@ -103,11 +105,14 @@ export function TemperatureSignal() {
       </div>
       <p className="component-intro">
         A heat source — like the terrarium's heating pad. It generates an
-        environmental signal: a temperature <MathText tex="T" /> that starts
-        at its previous value <MathText tex="T_o" /> and closes on the set
-        temperature <MathText tex="T_s" /> at a rate proportional to the gap
-        that remains — Newton's law of cooling. The differential equation is
-        first-order linear; its solution is exponential.
+        environmental signal: <MathText tex="(T_o - T_s) e^{-kt}" /> — the gap
+        between the previous temperature <MathText tex="T_o" /> and the set
+        temperature <MathText tex="T_s" />, decaying exponentially. The
+        temperature of the air is the panel setting plus that signal; it is
+        the air temperature, <MathText tex="T(t)" />, that settles at{" "}
+        <MathText tex="T_s" /> as the signal fades away — Newton's law of
+        cooling. The differential equation is first-order linear; its solution
+        is exponential.
       </p>
       <div className="component-controls">
         <label>
