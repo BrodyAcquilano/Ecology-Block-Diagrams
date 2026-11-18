@@ -109,4 +109,4 @@ $$
 \lim_{t \to \infty} \left( T_s - T_o \right) e^{-kt} = 0
 $$
 
-So the heat source's signal is the gap attenuating over time — the time counterpart of the thermodynamic filter's attenuation over distance. The temperature does not attenuate; it grows toward the setting as the gap fades.
+So the heat source's signal is the gap attenuating over time — the time counterpart of the thermodynamic filter's attenuation over distance. The temperature does not attenuate; it grows toward the setting as the gap fades — but the rate it grows at is attenuated over time.
