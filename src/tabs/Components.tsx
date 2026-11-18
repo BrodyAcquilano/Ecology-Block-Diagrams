@@ -11,7 +11,7 @@
 import { useState } from "react";
 import { TemperatureSignal } from "../components/TemperatureSignal";
 import { Thermostat } from "../components/Thermostat";
-import { ExponentialTransform } from "../components/ExponentialTransform";
+import { ExponentialTransform } from "../components/ThermodynamicFilter";
 import { SymbolGlyph } from "../components/SymbolGlyph";
 
 const GROUPS: { title: string; items: { name: string; kind: string }[] }[] = [

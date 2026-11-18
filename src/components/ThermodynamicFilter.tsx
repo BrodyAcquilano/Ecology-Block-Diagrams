@@ -1,5 +1,5 @@
 // Thermodynamic filter — reusable component
-// (file: ExponentialTransform.tsx)
+// (file: ThermodynamicFilter.tsx)
 // A temperature that is constant in time and changes only in
 // position: the thermodynamic distance filter. Its value at
 // position x is T(x) = T_end + (T(0) - T_end) * e^(-cutoff * x),

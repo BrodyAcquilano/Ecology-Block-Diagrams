@@ -10,7 +10,7 @@
     "definition": "What it represents is two signals combined into one by adding them: the pair of the difference operator, for the places where a signal is genuinely the sum of two parts. Its place in this note is the system diagram, where a signal's position part — the value of Q at a point, constant at that point — adds with its time part, Q(t), an oscillator. Because the position part is constant, the output of the adding is an oscillator that just becomes Q(t) again: adding a constant to the oscillator does not change its kind. Adding is this operator; multiplying is the mixer, ⊗; subtracting is the difference operator.",
     "group": "operator",
     "kind": "addition",
-    "name": "Addition operator — the adder, ⊕",
+    "name": "Addition operator",
     "sortOrder": 1
   },
   {
@@ -24,7 +24,7 @@
     "definition": "What it represents is one signal scaling another by multiplication: a transform carried out as a product. In this note the mixer is where the signal meets position: the exponential Q(t) runs through a transform that depends on the point, so the value of Q at point b is its value at point a reduced by the factor the move from a to b imposes — what comes out is the same signal, reduced by exactly that factor. The mixer does not add anything of its own; it applies one input to the other. (Addition is a different operation — the adder, ⊕, defined beside the difference operator above.)",
     "group": "operator",
     "kind": "mixer",
-    "name": "Mixer — ⊗",
+    "name": "Mixer",
     "sortOrder": 7
   },
   {
