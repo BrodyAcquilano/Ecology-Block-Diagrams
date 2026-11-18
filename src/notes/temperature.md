@@ -27,10 +27,10 @@ $$
 T(0) = T_o
 $$
 
-The difference operator measures the gap between the setting and the feedback:
+The difference operator measures the gap between the feedback and the setting:
 
 $$
-T_s - T(t)
+T(t) - T_s
 $$
 
 That gap is the heat source's input — the intermediate signal. The heat source applies the exponential decay from Newton's law of cooling:
@@ -39,16 +39,16 @@ $$
 \frac{dT}{dt} = -k \left( T - T_s \right)
 $$
 
-so what leaves the heat source is its signal, the starting gap decayed:
+so what leaves the heat source is that gap, decayed:
 
 $$
-\left( T_o - T_s \right) e^{-kt}
+\left( T(t) - T_s \right) e^{-kt}
 $$
 
 The addition operator adds the parallel branch of the setting to it, and that sum is T(t):
 
 $$
-T(t) = T_s + \left( T_o - T_s \right) e^{-kt}
+T(t) = T_s + \left( T(t) - T_s \right) e^{-kt}
 $$
 
 T(t) is fed back to the difference operator, and it also proceeds to the mixer. The thermodynamic filter's signal is mixed in there — the attenuation over space:
