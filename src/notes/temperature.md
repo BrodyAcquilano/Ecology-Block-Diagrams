@@ -21,31 +21,35 @@ $$
 
 The setting splits two ways. One branch goes into the difference operator. The other runs along a parallel branch, over the top, to the addition operator further along the chain.
 
-The output of the addition operator, T(t), is fed back to the difference operator along the loop below the chain. At the start it is:
+The output of the addition operator, T(t), is fed back to the difference operator along the loop below the chain. T(t) is the live temperature — it changes as time passes. At the start it is:
 
 $$
 T(0) = T_o
 $$
 
-The difference operator measures the gap between the feedback and the setting:
+T_o is not a separate signal on any line. It is only the starting value of T(t).
+
+The difference operator measures the live gap between the feedback and the setting:
 
 $$
 T(t) - T_s
 $$
 
-That gap is the heat source's input — the intermediate signal. The heat source applies the exponential decay from Newton's law of cooling:
+It is written with T(t) because it is live: the gap shrinks as T(t) closes on T_s.
+
+That gap is the heat source's input. The heat source applies the exponential decay from Newton's law of cooling:
 
 $$
 \frac{dT}{dt} = -k \left( T - T_s \right)
 $$
 
-so what leaves the heat source is its own signal — the starting gap, decayed:
+What leaves the heat source is the intermediate signal — its own signal, the starting gap decayed:
 
 $$
 \left( T_o - T_s \right) e^{-kt}
 $$
 
-That signal is a function of the starting gap and of t alone, not of the live feedback. The difference operator's output, T(t) − T_s, is the live gap; at the start, where T(0) = T_o, the two gaps are the same.
+It is written with T_o, not T(t). The signal is built from the starting gap, and the decay is the heat source's own time course, applied once — applied to the live gap, it would decay a gap that is already closing, and decay it twice. At the start, the live gap and the starting gap are the same number, because T(0) = T_o. That is where the two writings meet.
 
 The addition operator adds the parallel branch of the setting to it, and that sum is T(t):
 

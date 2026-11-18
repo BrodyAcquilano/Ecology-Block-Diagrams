@@ -75,7 +75,7 @@ $$
 \left( T_o - T_s \right) e^{-kt}
 $$
 
-The signal is a function of the starting gap and of t alone — it is not built from the live temperature T(t). In the block diagram, the difference operator's output, T(t) − T_s, is the live gap; only at the start, where T(0) = T_o, is that live gap the starting gap, T_o − T_s.
+Which variable each part uses: T_o is the starting temperature. It enters the solution once, through the starting condition in §4, where it sets the constant — and the signal keeps it, because the signal is built from the starting gap. T(t) is the running temperature of the air: it is what the solution gives, it is what gets fed back in the block diagram, and the difference operator's live gap is written with it, T(t) − T_s. The signal is not built from that live gap — its decay is applied once, to the starting gap. Only at the start, where T(0) = T_o, are the live gap and the starting gap the same.
 
 The temperature of the air is the setting of the heating panel plus that signal:
 
