@@ -28,10 +28,10 @@ $$
 The difference operator measures the gap between the setting and the feedback:
 
 $$
-T_s - T_o
+T_s - T(t)
 $$
 
-and that gap is what drives the heat source. Its temperature follows Newton's law of cooling:
+The setting also runs straight to the heat source, bypassing the difference operator — the solution takes both T_s and the gap as inputs. The gap is what drives the heat source. Its temperature follows Newton's law of cooling:
 
 $$
 \frac{dT}{dt} = -k \left( T - T_s \right)

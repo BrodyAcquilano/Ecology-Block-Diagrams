@@ -34,6 +34,16 @@ const NODES: DiagramNode[] = [
 
 const LINKS: DiagramLink[] = [
   { from: "tstat", to: "diff", fromAnchor: "right", toAnchor: "left" },
+  {
+    from: "tstat",
+    to: "heat",
+    fromAnchor: "top",
+    toAnchor: "top",
+    via: [
+      { x: 90, y: 32 },
+      { x: 490, y: 32 },
+    ],
+  },
   { from: "diff", to: "heat", fromAnchor: "right", toAnchor: "left" },
   {
     from: "heat",
@@ -52,6 +62,8 @@ const LINKS: DiagramLink[] = [
 
 const LABELS: DiagramLabel[] = [
   { x: 190, y: 90, tex: "T_s" },
+  { x: 290, y: 32, tex: "T_s" },
+  { x: 390, y: 90, tex: "T_s - T(t)" },
   { x: 580, y: 90, tex: "T(t)" },
   { x: 390, y: 175, tex: "T(t)" },
   { x: 772, y: 90, tex: "T(t, x)" },
