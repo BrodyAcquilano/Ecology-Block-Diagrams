@@ -1,7 +1,8 @@
 // Symbol glyph — the picture of a symbol, drawn inside an
 // outline that says what kind of thing it is:
 // a white circle for normal signals and operators,
-// a white square for transforms, a gear for control signals.
+// a white diamond for environmental signal generators,
+// a white square for transforms, a gear for controls.
 // Inside lines are white for operators, red for transforms
 // and thermodynamic signals.
 import type { ReactNode } from "react";
@@ -70,8 +71,10 @@ export const GLYPH_INK: Record<string, string> = {
 };
 
 // The outline shape says the kind: circle for normal signals
-// and operators, square for transforms, gear for control signals.
-export const GLYPH_SHAPE: Record<string, "circle" | "square" | "gear"> = {
+// and operators, diamond for environmental signal generators,
+// square for transforms, gear for controls.
+export const GLYPH_SHAPE: Record<string, "circle" | "diamond" | "square" | "gear"> = {
+  heatsource: "diamond",
   transform: "square",
   thermostat: "gear",
 };
@@ -82,6 +85,9 @@ export function SymbolGlyph({ kind, size = 64 }: { kind: string; size?: number }
     <svg viewBox="0 0 64 64" width={size} height={size} aria-hidden="true">
       {shape === "circle" && (
         <circle cx="32" cy="32" r="29" fill="none" stroke={INK} strokeWidth="2" />
+      )}
+      {shape === "diamond" && (
+        <polygon points="32,3 61,32 32,61 3,32" fill="none" stroke={INK} strokeWidth="2" />
       )}
       {shape === "square" && (
         <rect x="5" y="5" width="54" height="54" fill="none" stroke={INK} strokeWidth="2" />
