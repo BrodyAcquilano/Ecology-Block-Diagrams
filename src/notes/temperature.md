@@ -43,18 +43,24 @@ $$
 \frac{dT}{dt} = -k \left( T - T_s \right)
 $$
 
-What leaves the heat source is the intermediate signal — its own signal, the starting gap decayed:
+What leaves the heat source is the intermediate signal — its own signal, the starting gap decayed. In the derivation it is written with the constant C_1:
 
 $$
-\left( T_o - T_s \right) e^{-kt}
+C_1 e^{-kt}
 $$
 
-It is written with T_o, not T(t). The signal is built from the starting gap, and the decay is the heat source's own time course, applied once — applied to the live gap, it would decay a gap that is already closing, and decay it twice. At the start, the live gap and the starting gap are the same number, because T(0) = T_o. That is where the two writings meet.
+C_1 is a constant of the reaction, not an input. The starting condition fixes it once, to the starting gap:
+
+$$
+C_1 = T_o - T_s
+$$
+
+That is why there is no T_o line in the diagram: T_o is not an input either — it never travels on a line; it only sets the constant. The signal is written with C_1, not with the live T(t): the decay is the heat source's own time course, applied once — applied to the live gap, it would decay a gap that is already closing, and decay it twice. At the start, the live gap and the starting gap are the same number, because T(0) = T_o. That is where the two writings meet.
 
 The addition operator adds the parallel branch of the setting to it, and that sum is T(t):
 
 $$
-T(t) = T_s + \left( T_o - T_s \right) e^{-kt}
+T(t) = T_s + C_1 e^{-kt}
 $$
 
 T(t) is fed back to the difference operator, and it also proceeds to the mixer. The thermodynamic filter's signal is mixed in there — the attenuation over space:

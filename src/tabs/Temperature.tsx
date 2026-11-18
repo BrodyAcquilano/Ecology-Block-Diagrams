@@ -24,8 +24,10 @@ import note from "../notes/temperature.md?raw";
 // over the top to the addition operator. The difference
 // operator measures the gap between the setting and the
 // feedback, T(t); the gap is the heat source's input, and
-// what leaves the heat source is the gap decayed — the
-// intermediate signal. The addition operator adds the
+// what leaves the heat source is the starting gap decayed —
+// the intermediate signal, labelled with the constant C_1
+// (C_1 = T_o - T_s; a constant of the reaction, not an
+// input). The addition operator adds the
 // parallel branch of the setting to it, and that sum is
 // T(t): fed back to the difference operator, and on to the
 // mixer, where the thermodynamic filter's attenuation is
@@ -72,7 +74,7 @@ const LABELS: DiagramLabel[] = [
   { x: 185, y: 90, tex: "T_s" },
   { x: 365, y: 30, tex: "T_s" },
   { x: 375, y: 90, tex: "T(t) - T_s" },
-  { x: 555, y: 120, tex: "(T_o - T_s)e^{-kt}" },
+  { x: 555, y: 120, tex: "C_1e^{-kt}" },
   { x: 725, y: 90, tex: "T(t)" },
   { x: 460, y: 185, tex: "T(t)" },
   { x: 884, y: 90, tex: "T(t, x)" },
