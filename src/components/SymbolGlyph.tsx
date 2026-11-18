@@ -37,17 +37,16 @@ export const GLYPHS: Record<string, ReactNode> = {
       <path d="M32 30 C34 34, 37 36, 37 40 A5 5 0 1 1 27 40 C27 36, 30 34, 32 30 Z" />
     </>
   ),
-  // Control signals — thermostat: a dial. Tick lines in an arc
-  // across the top, a small circle in the middle, a needle line.
+  // Control signals — thermostat: a thermometer inside the
+  // gear. A tube with a round bulb at the bottom, the mercury
+  // line inside it, and two ticks beside the tube.
   thermostat: (
     <>
-      <line x1="17.9" y1="26.9" x2="14.1" y2="25.5" />
-      <line x1="23.4" y1="19.7" x2="21.1" y2="16.4" />
-      <line x1="32" y1="17" x2="32" y2="13" />
-      <line x1="40.6" y1="19.7" x2="42.9" y2="16.4" />
-      <line x1="46.1" y1="26.9" x2="49.9" y2="25.5" />
-      <circle cx="32" cy="32" r="4.5" />
-      <line x1="32" y1="32" x2="38.3" y2="23" />
+      <path d="M29.5 35.5 L29.5 14 A2.5 2.5 0 0 1 34.5 14 L34.5 35.5 A6.5 6.5 0 1 1 29.5 35.5 Z" />
+      <line x1="32" y1="22" x2="32" y2="36" />
+      <circle cx="32" cy="41.5" r="2.8" />
+      <line x1="38.5" y1="20" x2="42" y2="20" />
+      <line x1="38.5" y1="27" x2="42" y2="27" />
     </>
   ),
   // Transforms — thermodynamic filter: three wavy radiation lines

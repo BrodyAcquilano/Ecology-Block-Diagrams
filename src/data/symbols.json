@@ -30,7 +30,7 @@
   {
     "kind": "thermostat",
     "name": "Thermostat",
-    "definition": "What it represents is a component: the thermostat. It generates a control signal — the set temperature T_s, dialled in and held constant. The signal is not drawn as a block in a diagram; it is what is measured on the line leaving the thermostat, and everything else in the system chases it. Turn the dial and T_s takes a new value; between turns, it is constant. Function type: constant. It is drawn with a gear around the outside and a dial inside, so control components can be told apart at a glance.",
+    "definition": "What it represents is a component: the thermostat. It generates a control signal — the set temperature T_s, dialled in and held constant. The signal is not drawn as a block in a diagram; it is what is measured on the line leaving the thermostat, and everything else in the system chases it. Turn the dial and T_s takes a new value; between turns, it is constant. Function type: constant. It is drawn with a gear around the outside and a thermometer inside, so control components can be told apart at a glance.",
     "group": "control",
     "sortOrder": 10
   },
