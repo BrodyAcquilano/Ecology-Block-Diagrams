@@ -83,7 +83,11 @@ $$
 
 $C_1$ is a constant of the reaction, not an input — the starting condition fixes it once. $T_o$ has no line in the diagram for the same reason: it is not an input either; it only sets the constant.
 
-Which variable each part uses: $T_o$ is the starting temperature. It enters the solution once, through the starting condition in §4, where it sets the constant — and the signal keeps it, because the signal is built from the starting gap. $T(t)$ is the running temperature of the air: it is what the solution gives, it is what gets fed back in the block diagram, and the difference operator's live gap is written with it, $T(t) - T_s$. The signal is not built from that live gap — its decay is applied once, to the starting gap. Only at the start, where $T(0) = T_o$, are the live gap and the starting gap the same.
+Which variable each part uses: $T_o$ is the starting temperature. It enters the solution once, through the starting condition in §4, where it sets the constant — and the signal keeps it, because the signal is built from the starting gap. $T(t)$ is the running temperature of the air: it is what the solution gives, it is what gets fed back in the block diagram, and the difference operator's live gap is written with it, $T(t) - T_s$. The signal is not built from that live gap — its decay is applied once, to the starting gap. Only at the start, where $T(0) = T_o$, are the live gap and the starting gap the same:
+
+$$
+T(t) - T_s = T_o - T_s
+$$
 
 The block diagram is the solution, rearranged. Move the setting to the left of the solution and it is the line from §3 again:
 
