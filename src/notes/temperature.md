@@ -9,7 +9,7 @@ Contents:
 
 The terrarium heat study, simplified down to one thing: the thermostat control. The blocks in the diagram are components, and each component generates a signal. The signals are not drawn as blocks — a signal is what is measured on the line leaving a component, at its edges.
 
-The thermostat generates a control signal, the heat source generates an environmental signal, and the thermodynamic filter generates a transform.
+The thermostat is a control, the heat source is an environmental signal generator, and the thermodynamic filter generates a transform.
 
 ## 2. The block diagram
 

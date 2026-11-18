@@ -1,7 +1,7 @@
 // Components tab
 // A list of reusable components, grouped the same way as the
-// symbols: Control signals first (the inputs), then
-// Environmental signals, Transforms, and Operators last.
+// symbols: Controls first (the inputs), then
+// Environmental signal generators, Transforms, and Operators last.
 // Operators is empty for now.
 // Circle for normal signals, gear for control signals,
 // square for transforms.
@@ -15,11 +15,11 @@ import { SymbolGlyph } from "../components/SymbolGlyph";
 
 const GROUPS: { title: string; items: { name: string; kind: string }[] }[] = [
   {
-    title: "Control signals",
+    title: "Controls",
     items: [{ name: "Thermostat", kind: "thermostat" }],
   },
   {
-    title: "Environmental signals",
+    title: "Environmental signal generators",
     items: [
       { name: "Heat Source", kind: "heatsource" },
     ],

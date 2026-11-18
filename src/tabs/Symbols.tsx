@@ -2,11 +2,11 @@
 // Symbol on the left, definition on the right.
 // The outline of the picture says what kind of thing it is:
 // a white circle for normal signals and operators, a white
-// square for transforms, a gear for control signals.
+// square for transforms, a gear for controls.
 // Inside lines: white for operators, heat-orange for signals,
 // red for transforms and thermodynamic signals.
-// Order: Control signals first (they are the inputs), then
-// Environmental signals, then Transforms, Operators last.
+// Order: Controls first (they are the inputs), then
+// Environmental signal generators, then Transforms, Operators last.
 import symbols from "../data/symbols.json";
 import { SymbolGlyph } from "../components/SymbolGlyph";
 
@@ -19,8 +19,8 @@ type Sym = {
 };
 
 const GROUPS: { key: string; title: string }[] = [
-  { key: "control", title: "Control signals" },
-  { key: "environmental", title: "Environmental signals" },
+  { key: "control", title: "Controls" },
+  { key: "environmental", title: "Environmental signal generators" },
   { key: "transform", title: "Transforms" },
   { key: "operator", title: "Operators" },
 ];
