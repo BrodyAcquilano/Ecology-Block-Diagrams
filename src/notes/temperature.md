@@ -45,6 +45,8 @@ $$
 \left( T_o - T_s \right) e^{-kt}
 $$
 
+That signal is a function of the starting gap and of t alone, not of the live feedback. The difference operator's output, T(t) − T_s, is the live gap; at the start, where T(0) = T_o, the two gaps are the same.
+
 The addition operator adds the parallel branch of the setting to it, and that sum is T(t):
 
 $$
