@@ -10,7 +10,7 @@
 // Environmental signal generators, then Transforms, Operators last.
 // Each symbol is a self-contained component in src/Symbols,
 // carrying its own name, group, order and definition.
-import { SYMBOLS } from "../Symbols";
+import { SYMBOLS } from "../../Symbols";
 
 const GROUPS = [
   { key: "control", title: "Controls" },

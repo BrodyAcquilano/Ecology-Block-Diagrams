@@ -15,9 +15,9 @@
 // The derivation of the solution is in the note below the graph.
 import { useEffect, useRef, useState } from "react";
 import { MarkdownNote } from "../MarkdownNote";
-import { HeatSourceSymbol } from "../../../Symbols";
+import { HeatSourceSymbol } from "../../Symbols";
 import { MathText } from "../MathText";
-import note from "../../../notes/temperature-signal-derivation.md?raw";
+import note from "../markdown/temperature-signal-derivation.md?raw";
 
 export function TemperatureSignal() {
   const [To, setTo] = useState(80);

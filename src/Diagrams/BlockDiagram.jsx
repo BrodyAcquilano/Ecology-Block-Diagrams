@@ -8,7 +8,7 @@
 // positive clockwise), so a line can meet an outline
 // anywhere. Label boxes (the LabelBox component) are placed
 // by their centre point, with font and colours set per box.
-import { SYMBOLS_BY_KIND } from "../../Symbols";
+import { SYMBOLS_BY_KIND } from "../Symbols";
 import { LabelBox } from "./LabelBox";
 
 // A node is { id, symbol, x, y, size? }.

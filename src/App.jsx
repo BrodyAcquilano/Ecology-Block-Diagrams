@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Header } from "./components/Navigation/Header";
-import { Symbols } from "./tabs/Symbols";
-import { Components } from "./tabs/Components";
-import { Temperature } from "./tabs/Temperature";
+import { Header } from "./Navigation/Header";
+import { Symbols } from "./Navigation/tabs/Symbols";
+import { Components } from "./Navigation/tabs/Components";
+import { Temperature } from "./Navigation/tabs/Temperature";
 import "./index.css";
 
 const TABS = ["Symbols", "Components", "Temperature"];

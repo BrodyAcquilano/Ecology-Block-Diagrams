@@ -7,10 +7,10 @@
 // diagram of the model, drawn with the reusable BlockDiagram
 // container, and a short note introducing it.
 import { useEffect, useRef, useState } from "react";
-import { BlockDiagram } from "../components/Diagrams/BlockDiagram";
-import { MarkdownNote } from "../components/Notes/MarkdownNote";
-import { MathText } from "../components/Notes/MathText";
-import note from "../notes/temperature.md?raw";
+import { BlockDiagram } from "../../Diagrams/BlockDiagram";
+import { MarkdownNote } from "../../Notes/MarkdownNote";
+import { MathText } from "../../Notes/MathText";
+import note from "../../Notes/markdown/temperature.md?raw";
 
 // The diagram, placed by x/y in the BlockDiagram. The blocks
 // are components; the signals are what is measured on the
