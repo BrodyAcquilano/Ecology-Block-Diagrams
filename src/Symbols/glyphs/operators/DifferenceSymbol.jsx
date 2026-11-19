@@ -1,7 +1,7 @@
 // Difference operator — a short minus in the centre of a circle.
 // Self-contained: its picture, its ink, its outline and its
 // description all live here.
-import { CircleOutline } from "../outlines/CircleOutline";
+import { CircleOutline } from "../../outlines/CircleOutline";
 
 const INK = "#e8e8e8"; // white
 

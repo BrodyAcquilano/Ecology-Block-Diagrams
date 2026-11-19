@@ -1,12 +1,14 @@
 // Every symbol, in one list. Each symbol is a self-contained
-// component in glyphs/ — its picture, ink, outline and
-// description — drawn inside one of the outlines in outlines/.
-import { DifferenceSymbol } from "./glyphs/DifferenceSymbol";
-import { AdditionSymbol } from "./glyphs/AdditionSymbol";
-import { MixerSymbol } from "./glyphs/MixerSymbol";
-import { HeatSourceSymbol } from "./glyphs/HeatSourceSymbol";
-import { ThermostatSymbol } from "./glyphs/ThermostatSymbol";
-import { ThermodynamicFilterSymbol } from "./glyphs/ThermodynamicFilterSymbol";
+// component — its picture, ink, outline and description —
+// drawn inside one of the outlines in outlines/. The symbols
+// live in glyphs/, sorted by group into operators/,
+// environmental-signal-generators/, transforms/ and controls/.
+import { DifferenceSymbol } from "./glyphs/operators/DifferenceSymbol";
+import { AdditionSymbol } from "./glyphs/operators/AdditionSymbol";
+import { MixerSymbol } from "./glyphs/operators/MixerSymbol";
+import { HeatSourceSymbol } from "./glyphs/environmental-signal-generators/HeatSourceSymbol";
+import { ThermostatSymbol } from "./glyphs/controls/ThermostatSymbol";
+import { ThermodynamicFilterSymbol } from "./glyphs/transforms/ThermodynamicFilterSymbol";
 
 export {
   DifferenceSymbol,

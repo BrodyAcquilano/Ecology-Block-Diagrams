@@ -3,7 +3,7 @@
 // two ticks beside the tube.
 // Self-contained: its picture, its ink, its outline and its
 // description all live here.
-import { GearOutline } from "../outlines/GearOutline";
+import { GearOutline } from "../../outlines/GearOutline";
 
 const INK = "#e5484d"; // red
 

@@ -2,7 +2,7 @@
 // component's symbol.
 // Self-contained: its picture, its ink, its outline and its
 // description all live here.
-import { DiamondOutline } from "../outlines/DiamondOutline";
+import { DiamondOutline } from "../../outlines/DiamondOutline";
 
 const INK = "#e5484d"; // red
 

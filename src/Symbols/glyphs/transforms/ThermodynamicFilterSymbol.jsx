@@ -2,7 +2,7 @@
 // the square, gaps between them, not touching the edges.
 // Self-contained: its picture, its ink, its outline and its
 // description all live here.
-import { SquareOutline } from "../outlines/SquareOutline";
+import { SquareOutline } from "../../outlines/SquareOutline";
 
 const INK = "#e5484d"; // red
 
