@@ -1,5 +1,5 @@
 // Header — title on the left, Ecology Lab tree symbol on the right.
-import treeUrl from "../assets/ecology-tree.svg";
+import treeUrl from "../../assets/ecology-tree.svg";
 
 export function Header() {
   return (

@@ -7,9 +7,9 @@
 // diagram of the model, drawn with the reusable BlockDiagram
 // container, and a short note introducing it.
 import { useEffect, useRef, useState } from "react";
-import { BlockDiagram } from "../components/BlockDiagram";
-import { MarkdownNote } from "../components/MarkdownNote";
-import { MathText } from "../components/MathText";
+import { BlockDiagram } from "../components/Diagrams/BlockDiagram";
+import { MarkdownNote } from "../components/Notes/MarkdownNote";
+import { MathText } from "../components/Notes/MathText";
 import note from "../notes/temperature.md?raw";
 
 // The diagram, placed by x/y in the BlockDiagram. The blocks

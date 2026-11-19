@@ -3,7 +3,7 @@
 // Font size, font colour, border colour and fill are all
 // settable per box. The text is plain, or LaTeX when tex
 // is given.
-import { MathText } from "./MathText";
+import { MathText } from "../Notes/MathText";
 
 export function LabelBox({
   x,

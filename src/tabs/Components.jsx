@@ -8,9 +8,9 @@
 // generators, square for transforms.
 // Each entry in the list shows the component's symbol beside
 // its name.
-import { TemperatureSignal } from "../components/TemperatureSignal";
-import { Thermostat } from "../components/Thermostat";
-import { ThermodynamicFilter } from "../components/ThermodynamicFilter";
+import { TemperatureSignal } from "../components/Notes/notes/TemperatureSignal";
+import { Thermostat } from "../components/Notes/notes/Thermostat";
+import { ThermodynamicFilter } from "../components/Notes/notes/ThermodynamicFilter";
 import {
   HeatSourceSymbol,
   ThermodynamicFilterSymbol,

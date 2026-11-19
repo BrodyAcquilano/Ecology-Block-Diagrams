@@ -9,10 +9,10 @@
 // while the old steps stay on screen behind it.
 // The short note is below the graph.
 import { useEffect, useRef, useState } from "react";
-import { MarkdownNote } from "./MarkdownNote";
-import { ThermostatSymbol } from "../Symbols";
-import { MathText } from "./MathText";
-import note from "../notes/thermostat.md?raw";
+import { MarkdownNote } from "../MarkdownNote";
+import { ThermostatSymbol } from "../../../Symbols";
+import { MathText } from "../MathText";
+import note from "../../../notes/thermostat.md?raw";
 
 export function Thermostat() {
   const [Ts, setTs] = useState(25);

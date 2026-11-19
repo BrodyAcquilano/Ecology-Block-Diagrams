@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Header } from "./components/Header";
+import { Header } from "./components/Navigation/Header";
 import { Symbols } from "./tabs/Symbols";
 import { Components } from "./tabs/Components";
 import { Temperature } from "./tabs/Temperature";
