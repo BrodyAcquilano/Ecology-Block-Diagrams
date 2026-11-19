@@ -15,7 +15,7 @@
 // The derivation of the solution is in the note below the graph.
 import { useEffect, useRef, useState } from "react";
 import { MarkdownNote } from "./MarkdownNote";
-import { SymbolGlyph } from "./SymbolGlyph";
+import { HeatSourceSymbol } from "../Symbols";
 import { MathText } from "./MathText";
 import note from "../notes/temperature-signal-derivation.md?raw";
 
@@ -98,7 +98,7 @@ export function TemperatureSignal() {
   return (
     <div>
       <div className="component-header">
-        <SymbolGlyph kind="heatsource" size={56} />
+        <HeatSourceSymbol size={56} />
         <h2 className="component-title">Heat Source</h2>
       </div>
       <p className="component-intro">

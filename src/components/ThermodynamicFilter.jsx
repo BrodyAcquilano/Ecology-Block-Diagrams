@@ -10,7 +10,7 @@
 // Variable labels are set in LaTeX (MathText) — before the
 // graph and on the graph itself, as overlays on the canvas.
 import { useEffect, useRef, useState } from "react";
-import { SymbolGlyph } from "./SymbolGlyph";
+import { ThermodynamicFilterSymbol } from "../Symbols";
 import { MathText } from "./MathText";
 
 export function ThermodynamicFilter() {
@@ -76,7 +76,7 @@ export function ThermodynamicFilter() {
   return (
     <div>
       <div className="component-header">
-        <SymbolGlyph kind="transform" size={56} />
+        <ThermodynamicFilterSymbol size={56} />
         <h2 className="component-title">Thermodynamic filter</h2>
       </div>
       <p className="component-intro">

@@ -10,7 +10,7 @@
 // The short note is below the graph.
 import { useEffect, useRef, useState } from "react";
 import { MarkdownNote } from "./MarkdownNote";
-import { SymbolGlyph } from "./SymbolGlyph";
+import { ThermostatSymbol } from "../Symbols";
 import { MathText } from "./MathText";
 import note from "../notes/thermostat.md?raw";
 
@@ -95,7 +95,7 @@ export function Thermostat() {
   return (
     <div>
       <div className="component-header">
-        <SymbolGlyph kind="thermostat" size={56} />
+        <ThermostatSymbol size={56} />
         <h2 className="component-title">Thermostat</h2>
       </div>
       <p className="component-intro">

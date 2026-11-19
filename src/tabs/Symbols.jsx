@@ -8,8 +8,9 @@
 // red for transforms and thermodynamic signals.
 // Order: Controls first (they are the inputs), then
 // Environmental signal generators, then Transforms, Operators last.
-import symbols from "../data/symbols.json";
-import { SymbolGlyph } from "../components/SymbolGlyph";
+// Each symbol is a self-contained component in src/Symbols,
+// carrying its own name, group, order and definition.
+import { SYMBOLS } from "../Symbols";
 
 const GROUPS = [
   { key: "control", title: "Controls" },
@@ -19,7 +20,7 @@ const GROUPS = [
 ];
 
 export function Symbols() {
-  const ordered = [...symbols].sort(
+  const ordered = [...SYMBOLS].sort(
     (a, b) => a.sortOrder - b.sortOrder
   );
   return (
@@ -30,14 +31,14 @@ export function Symbols() {
           <div className="symbol-list">
             {ordered
               .filter((s) => s.group === g.key)
-              .map((s) => (
-                <div className="symbol-row" key={s.kind}>
+              .map((Sym) => (
+                <div className="symbol-row" key={Sym.kind}>
                   <div className="symbol-glyph">
-                    <SymbolGlyph kind={s.kind} />
+                    <Sym />
                   </div>
                   <div>
-                    <div className="symbol-name">{s.name}</div>
-                    <div className="symbol-def">{s.definition}</div>
+                    <div className="symbol-name">{Sym.label}</div>
+                    <div className="symbol-def">{Sym.definition}</div>
                   </div>
                 </div>
               ))}

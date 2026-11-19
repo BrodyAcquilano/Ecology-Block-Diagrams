@@ -1,14 +1,14 @@
 // Block diagram — reusable component
 // A box container for holding a block diagram. Symbols are
 // inserted as components (one per symbol, kept in
-// src/assets/symbols.jsx) and placed at specific x/y
+// src/Symbols) and placed at specific x/y
 // positions. Links draw lines between points on the symbols'
 // outlines: a point is one of the 4 quadrant points — top,
 // right, bottom, left — or any angle in degrees (0 = right,
 // positive clockwise), so a line can meet an outline
 // anywhere. Label boxes (the LabelBox component) are placed
 // by their centre point, with font and colours set per box.
-import { SYMBOL_COMPONENTS } from "../assets/symbols";
+import { SYMBOLS_BY_KIND } from "../Symbols";
 import { LabelBox } from "./LabelBox";
 
 // A node is { id, symbol, x, y, size? }.
@@ -104,7 +104,7 @@ export function BlockDiagram({
         })}
       </svg>
       {nodes.map((n) => {
-        const Sym = SYMBOL_COMPONENTS[n.symbol];
+        const Sym = SYMBOLS_BY_KIND[n.symbol];
         if (!Sym) return null;
         return (
           <div key={n.id} className="diagram-node" style={{ left: n.x, top: n.y }}>

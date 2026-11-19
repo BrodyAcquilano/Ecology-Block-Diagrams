@@ -11,22 +11,26 @@
 import { TemperatureSignal } from "../components/TemperatureSignal";
 import { Thermostat } from "../components/Thermostat";
 import { ThermodynamicFilter } from "../components/ThermodynamicFilter";
-import { SymbolGlyph } from "../components/SymbolGlyph";
+import {
+  HeatSourceSymbol,
+  ThermodynamicFilterSymbol,
+  ThermostatSymbol,
+} from "../Symbols";
 
 const GROUPS = [
   {
     title: "Controls",
-    items: [{ name: "Thermostat", kind: "thermostat" }],
+    items: [{ name: "Thermostat", symbol: ThermostatSymbol }],
   },
   {
     title: "Environmental signal generators",
     items: [
-      { name: "Heat Source", kind: "heatsource" },
+      { name: "Heat Source", symbol: HeatSourceSymbol },
     ],
   },
   {
     title: "Transforms",
-    items: [{ name: "Thermodynamic filter", kind: "transform" }],
+    items: [{ name: "Thermodynamic filter", symbol: ThermodynamicFilterSymbol }],
   },
 ];
 
@@ -46,7 +50,7 @@ export function Components({ active, setActive }) {
                 className={c.name === active ? "active" : ""}
                 onClick={() => setActive(c.name)}
               >
-                <SymbolGlyph kind={c.kind} size={26} />
+                <c.symbol size={26} />
                 {c.name}
               </button>
             ))}
